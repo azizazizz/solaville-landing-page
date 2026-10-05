@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/* Dark mode diaktifkan lewat class ".dark" di <html>, bukan hanya mengikuti OS */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Montserrat", sans-serif;
+  --font-body: "Mulish", sans-serif;
+
+  /* Base palette from https://colorhunt.co/palette/0061998acff8f4eb6cffd444 */
+  /* Token adaptif: nilainya berbeda di light vs dark mode (lihat blok .dark di bawah) */
+  --color-base: #f5fafe;
+  --color-base-alt: #e3f2fc;
+  --color-primary: #006199;
+  --color-primary-dark: #004a75;
+  --color-on-primary: #f2f8fd;
+  --color-fg: #052a40;
+  --color-fg-soft: #3e6075;
+
+  /* Aksen vivid, nilainya sama di kedua mode */
+  --color-sky: #8acff8;
+  --color-sun: #f4eb6c;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #1da851;
+
+  /* Khusus validasi form (adaptif, lihat blok .dark di bawah) */
+  --color-danger: #c23b3b;
+
+  /* Token tetap: panel yang memang harus selalu gelap (footer, overlay modal, tombol SPR) */
+  --color-night: #052a40;
+  --color-night-soft: #0a3c59;
+  --color-on-night: #f2f8fd;
+
+  /*
+   * Animasi dipakai terbatas dan masing-masing punya tujuan UX (lihat catatan di tiap komponen).
+   * Fill-mode sengaja "backwards", bukan "both": setelah selesai, elemen kembali ke gaya aslinya
+   * sehingga tidak ada transform/opacity yang tertinggal (yang bisa mengubah posisi elemen fixed
+   * di dalamnya, seperti modal, atau urutan tumpukan z-index).
+   */
+  --animate-fade-in: fade-in 0.25s ease-out backwards;
+  --animate-rise-in: rise-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  --animate-pop-in: pop-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(var(--rise, 14px));
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+.dark {
+  --color-base: #0c2033;
+  --color-base-alt: #15314a;
+  /* Sedikit lebih terang dari turunan proporsional (#2e8fc0), supaya kontras terhadap
+     --color-base gelap punya margin lebih aman (~5.3:1) daripada pas-pasan di ambang 4.5:1 */
+  --color-primary: #349bd1;
+  /* Warna hover tombol: di dark mode justru lebih terang, supaya teks gelap di atasnya tetap kontras */
+  --color-primary-dark: #5db4e3;
+  /* Teks di atas tombol primary: gelap di dark mode (kontras 4,8:1; putih hanya 2,9:1) */
+  --color-on-primary: #052a40;
+  --color-fg: #eaf4fb;
+  --color-fg-soft: #9fb8c8;
+  --color-danger: #e57373;
+}
+
+/* Fokus keyboard yang jelas untuk semua elemen interaktif; input memakai ring sendiri (lihat komponen form) */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-base);
+  color: var(--color-fg);
+  font-family: var(--font-body);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+}
+
+/* Efek muncul saat konten masuk layar (dikendalikan komponen Reveal, hanya sekali per elemen) */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Sudah terlihat saat halaman dibuka: tampil langsung tanpa transisi (animasi masuknya ditangani transisi halaman) */
+.reveal[data-visible="instant"] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Hormati preferensi sistem: pengguna yang meminta gerak minimal tidak melihat animasi apa pun */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media print {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
