@@ -23,13 +23,13 @@ export const gallery = [
     id: "gal-03",
     kategori: "interior",
     alt: "Ruang tamu dan ruang keluarga konsep terbuka",
-    label: "Ruang Keluarga Tipe 60",
+    label: "Ruang Keluarga Tipe 45",
   },
   {
     id: "gal-04",
     kategori: "interior",
     alt: "Kamar tidur utama dengan jendela besar",
-    label: "Kamar Utama Tipe 72",
+    label: "Kamar Utama Tipe 45",
   },
   {
     id: "gal-05",
@@ -70,8 +70,8 @@ export const gallery = [
   {
     id: "gal-11",
     kategori: "eksterior",
-    alt: "Rumah tipe 72 dua lantai dengan balkon",
-    label: "Fasad Tipe 72",
+    alt: "Rumah tipe 36 satu lantai dengan carport",
+    label: "Fasad Tipe 36",
   },
   {
     id: "gal-12",

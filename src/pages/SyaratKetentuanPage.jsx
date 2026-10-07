@@ -23,7 +23,10 @@ export default function SyaratKetentuanPage() {
             Informasi tipe rumah, harga, luas tanah, dan luas bangunan yang ditampilkan di
             situs ini bersifat indikatif dan dapat berubah sewaktu-waktu tanpa pemberitahuan
             terlebih dahulu, menyesuaikan dengan ketersediaan unit, lokasi kavling, dan
-            kebijakan pengembang.
+            kebijakan pengembang. Program uang muka (DP) 0% yang dipromosikan di situs ini
+            berlaku dengan syarat dan ketentuan tertentu, termasuk persetujuan pembiayaan dari
+            bank, kelengkapan dokumen pemohon, dan kebijakan pengembang yang dapat berubah
+            sewaktu-waktu.
           </p>
         </div>
 

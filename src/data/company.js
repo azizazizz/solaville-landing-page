@@ -19,6 +19,12 @@ export const company = {
 
   keunggulan: [
     {
+      judul: "Punya Rumah dengan DP 0%",
+      deskripsi:
+        "Anda bisa memiliki rumah di Solaville tanpa menyiapkan uang muka di awal. Besaran cicilannya bisa dihitung langsung dari harga unit. Syarat dan ketentuan berlaku.",
+      tautan: { teks: "Coba simulasi cicilan", ke: "/simulasi" },
+    },
+    {
       judul: "Akses ke Jalan Tol",
       deskripsi:
         "Jarak tempuh sekitar 10 menit berkendara ke Gerbang Tol Sukaragam (Tol Jakarta-Cikampek 2 Selatan), memudahkan mobilitas harian menuju Jakarta maupun kawasan industri Bekasi.",

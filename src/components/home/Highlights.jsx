@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { company } from "../../data/company"
 import SectionHeading from "../common/SectionHeading"
 import PlaceholderImage from "../common/PlaceholderImage"
@@ -33,6 +34,14 @@ export default function Highlights() {
               <div>
                 <h3 className="text-2xl text-fg">{item.judul}</h3>
                 <p className="mt-2 text-fg-soft">{item.deskripsi}</p>
+                {item.tautan ? (
+                  <Link
+                    to={item.tautan.ke}
+                    className="mt-3 -mb-3 inline-block py-3 text-sm uppercase tracking-wide text-primary underline decoration-primary/40 underline-offset-4 transition-colors hover:decoration-primary"
+                  >
+                    {item.tautan.teks}
+                  </Link>
+                ) : null}
               </div>
             </Reveal>
           )

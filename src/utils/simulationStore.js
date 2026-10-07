@@ -1,8 +1,13 @@
+import { getUnitById } from "../data/units"
+
 const STORAGE_KEY = "solaville-simulasi"
 
+// Simulasi yang menunjuk tipe unit yang sudah tidak ada (mis. daftar tipe berubah setelah deploy)
+// dianggap tidak valid, supaya tidak menampilkan data basi.
 const isValid = (v) =>
   v &&
   typeof v.unitId === "string" &&
+  (v.unitId === "" || Boolean(getUnitById(v.unitId))) &&
   Number.isFinite(v.harga) &&
   Number.isFinite(v.tenorBulan) &&
   Number.isFinite(v.ratePercent)

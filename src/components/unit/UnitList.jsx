@@ -33,9 +33,9 @@ export default function UnitList({ units, initialSelectedId }) {
 
   return (
     <>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2">
         {units.map((unit, index) => (
-          <Reveal key={unit.id} delay={(index % 3) * 80}>
+          <Reveal key={unit.id} delay={(index % 2) * 80}>
             <UnitCard unit={unit} onPilih={(u) => setSelectedId(u.id)} />
           </Reveal>
         ))}
