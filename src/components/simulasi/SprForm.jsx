@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { formatRupiah, formatThousands } from "../../utils/currency"
-import { generateSprPdf } from "./SprDocument"
+import { buildSprNumber, generateSprPdf } from "./SprDocument"
 
 function TextField({ label, required, error, className = "", ...inputProps }) {
   return (
@@ -30,8 +30,10 @@ export default function SprForm({
   tenorBulan,
   ratePercent,
   result,
+  onComplete,
 }) {
   const [errors, setErrors] = useState({})
+  const [submitError, setSubmitError] = useState("")
 
   function clearError(field) {
     setErrors((prev) => {
@@ -79,7 +81,28 @@ export default function SprForm({
 
   function handleGenerate() {
     if (!validate()) return
-    generateSprPdf({ buyer, unitIdentity, unit, harga, tenorBulan, ratePercent, result })
+    setSubmitError("")
+
+    const sprNumber = buildSprNumber()
+    const tanggal = new Date().toISOString()
+    try {
+      generateSprPdf({
+        buyer,
+        unitIdentity,
+        unit,
+        harga,
+        tenorBulan,
+        ratePercent,
+        result,
+        sprNumber,
+        tanggal,
+      })
+    } catch {
+      // Tidak lanjut ke langkah "Selesai" bila PDF gagal dibuat
+      setSubmitError("SPR gagal dibuat. Periksa isian Anda lalu coba lagi.")
+      return
+    }
+    onComplete({ sprNumber, tanggal })
   }
 
   return (
@@ -203,13 +226,20 @@ export default function SprForm({
         </dl>
       </div>
 
-      <button
-        type="button"
-        onClick={handleGenerate}
-        className="self-start rounded-xl bg-primary px-6 py-3 text-on-primary transition-colors hover:bg-primary-dark"
-      >
-        Unduh SPR (PDF)
-      </button>
+      <div className="flex flex-col items-start gap-3">
+        <button
+          type="button"
+          onClick={handleGenerate}
+          className="rounded-xl bg-primary px-6 py-3 text-on-primary transition-colors hover:bg-primary-dark"
+        >
+          Buat SPR (PDF)
+        </button>
+        {submitError ? (
+          <p role="alert" className="text-sm text-danger">
+            {submitError}
+          </p>
+        ) : null}
+      </div>
     </div>
   )
 }

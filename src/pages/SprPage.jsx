@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { getUnitById, units } from "../data/units"
 import { formatRupiah } from "../utils/currency"
 import { calculateInstallment } from "../utils/loan"
 import { loadSimulation, saveSimulation, simulationForUnit } from "../utils/simulationStore"
-import { getSprDraft, saveSprDraft } from "../utils/sprDraft"
+import { getSprDraft, saveCompletedSpr, saveSprDraft } from "../utils/sprDraft"
 import SectionHeading from "../components/common/SectionHeading"
 import SprForm from "../components/simulasi/SprForm"
 import StepIndicator from "../components/simulasi/StepIndicator"
@@ -56,6 +56,7 @@ function UnitPicker({ onPick }) {
 
 export default function SprPage() {
   const location = useLocation()
+  const navigate = useNavigate()
   // Prioritas: unit dari tombol "Pesan Unit Ini", lalu simulasi tersimpan. Tanpa keduanya tidak ada
   // nilai bawaan: pengunjung diminta memilih unit dulu.
   const [simulasi, setSimulasi] = useState(() => {
@@ -85,6 +86,12 @@ export default function SprPage() {
   function handlePickUnit(unitId) {
     const picked = getUnitById(unitId)
     if (picked) setSimulasi(simulationForUnit(picked))
+  }
+
+  // Simpan salinan SPR yang baru dibuat (untuk ringkasan dan unduh ulang), lalu ke langkah 3
+  function handleComplete({ sprNumber, tanggal }) {
+    saveCompletedSpr({ sprNumber, tanggal, buyer, unitIdentity, simulasi })
+    navigate("/selesai")
   }
 
   return (
@@ -138,6 +145,7 @@ export default function SprPage() {
               tenorBulan={simulasi.tenorBulan}
               ratePercent={simulasi.ratePercent}
               result={result}
+              onComplete={handleComplete}
             />
           </div>
         </>

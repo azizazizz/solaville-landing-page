@@ -6,7 +6,7 @@ import { siteConfig } from "../../data/siteConfig"
 
 const HEADER_FILL = [5, 42, 64] // --color-night (#052a40)
 
-function buildSprNumber() {
+export function buildSprNumber() {
   const now = new Date()
   const stamp = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(
     now.getDate(),
@@ -16,11 +16,21 @@ function buildSprNumber() {
   return `SPR/${siteConfig.brandName.toUpperCase()}/${stamp}`
 }
 
-export function generateSprPdf({ buyer, unitIdentity, unit, harga, tenorBulan, ratePercent, result }) {
+// sprNumber dan tanggal bisa diberikan agar unduh ulang menghasilkan dokumen yang sama persis
+export function generateSprPdf({
+  buyer,
+  unitIdentity,
+  unit,
+  harga,
+  tenorBulan,
+  ratePercent,
+  result,
+  sprNumber = buildSprNumber(),
+  tanggal = new Date().toISOString(),
+}) {
   const doc = new jsPDF({ unit: "mm", format: "a4" })
   const pageHeight = doc.internal.pageSize.getHeight()
-  const sprNumber = buildSprNumber()
-  const today = new Date().toLocaleDateString("id-ID", {
+  const today = new Date(tanggal).toLocaleDateString("id-ID", {
     day: "numeric",
     month: "long",
     year: "numeric",

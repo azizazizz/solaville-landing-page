@@ -7,6 +7,7 @@ import GaleriPage from "./pages/GaleriPage"
 import KontakPage from "./pages/KontakPage"
 import SimulasiPage from "./pages/SimulasiPage"
 import SprPage from "./pages/SprPage"
+import SelesaiPage from "./pages/SelesaiPage"
 import SyaratKetentuanPage from "./pages/SyaratKetentuanPage"
 import KebijakanPrivasiPage from "./pages/KebijakanPrivasiPage"
 import NotFoundPage from "./pages/NotFoundPage"
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/kontak" element={<KontakPage />} />
           <Route path="/simulasi" element={<SimulasiPage />} />
           <Route path="/spr" element={<SprPage />} />
+          <Route path="/selesai" element={<SelesaiPage />} />
           <Route path="/syarat-dan-ketentuan" element={<SyaratKetentuanPage />} />
           <Route path="/kebijakan-privasi" element={<KebijakanPrivasiPage />} />
           <Route path="*" element={<NotFoundPage />} />

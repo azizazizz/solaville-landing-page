@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { to: "/unit", label: "Unit" },
   { to: "/galeri", label: "Galeri" },
   // /spr adalah langkah lanjutan dari simulasi, jadi menu "Simulasi" tetap menandai posisi pengguna
-  { to: "/simulasi", label: "Simulasi", alsoActiveOn: ["/spr"] },
+  { to: "/simulasi", label: "Simulasi", alsoActiveOn: ["/spr", "/selesai"] },
   { to: "/kontak", label: "Kontak" },
 ]
 
