@@ -1,4 +1,4 @@
-import { EMPTY_BUYER, EMPTY_UNIT_IDENTITY } from "../components/simulasi/sprDefaults"
+import { EMPTY_BUYER, EMPTY_UNIT_IDENTITY } from "./sprDefaults"
 
 // Draf form SPR dan SPR yang sudah jadi ditahan di memori saja (bukan sessionStorage/localStorage):
 // data pribadi seperti NIK tidak boleh tertulis ke penyimpanan browser. Hilang saat halaman

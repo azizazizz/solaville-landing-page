@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { units } from "../../data/units"
-import { formatThousands } from "../../utils/currency"
+import { formatThousands, parseRupiahInput } from "../../utils/currency"
 
 const TENOR_OPTIONS = [
   { value: 60, label: "5 tahun (60 bulan)" },
@@ -9,8 +9,6 @@ const TENOR_OPTIONS = [
   { value: 240, label: "20 tahun (240 bulan)" },
 ]
 
-// Batas wajar agar tampilan tidak rusak ("Rp∞", "RpNaN") oleh input ekstrem
-const MAX_HARGA_DIGITS = 11 // sampai Rp 99.999.999.999
 const MAX_RATE = 30
 
 // Field terisi di atas panel tonal: dibedakan lewat warna isi, fokus ditandai ring (bukan outline permanen).
@@ -51,11 +49,10 @@ export default function SimulatorForm({ values, onChange }) {
   }
 
   function handleHargaChange(event) {
-    const digitsOnly = event.target.value.replace(/\D/g, "").slice(0, MAX_HARGA_DIGITS)
     onChange({
       ...values,
       unitId: "",
-      harga: digitsOnly ? Number(digitsOnly) : 0,
+      harga: parseRupiahInput(event.target.value),
     })
   }
 

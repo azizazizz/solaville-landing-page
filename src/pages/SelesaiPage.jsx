@@ -6,7 +6,7 @@ import { formatRupiah } from "../utils/currency"
 import { calculateInstallment } from "../utils/loan"
 import { clearSprData, getCompletedSpr } from "../utils/sprDraft"
 import { IconCheck, IconWhatsapp } from "../components/common/icons"
-import { generateSprPdf } from "../components/simulasi/SprDocument"
+import { generateSprPdf } from "../utils/sprDocument"
 import StepIndicator from "../components/simulasi/StepIndicator"
 
 function SummaryItem({ label, value }) {

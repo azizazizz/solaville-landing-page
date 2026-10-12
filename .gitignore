@@ -27,3 +27,4 @@ anti-slop/
 *.sw?
 
 .env
+.env.example

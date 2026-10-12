@@ -1,12 +1,8 @@
 import { useRef, useState } from "react"
 import { units } from "../../data/units"
-import { formatRupiah, formatThousands } from "../../utils/currency"
-import { buildSprNumber, generateSprPdf } from "./SprDocument"
-
-const MAX_RUPIAH_DIGITS = 11 // sampai Rp 99.999.999.999
-
-// Urutan sesuai tampilan di layar, dipakai untuk menentukan kolom error pertama
-const FIELD_ORDER = ["namaLengkap", "nikKtp", "noHp", "email", "pekerjaan", "alamat", "unitId", "bookingFee"]
+import { formatRupiah, formatThousands, parseRupiahInput } from "../../utils/currency"
+import { buildSprNumber, generateSprPdf } from "../../utils/sprDocument"
+import { SPR_FIELD_ORDER, validateSpr } from "../../utils/sprValidation"
 
 const inputClass = (error) =>
   `rounded-xl bg-base px-4 py-3 text-fg outline-none ring-2 transition-shadow ${
@@ -38,7 +34,7 @@ function TextField({ name, label, required, error, className = "", ...inputProps
 }
 
 function focusFirstError(errors) {
-  const first = FIELD_ORDER.find((key) => errors[key])
+  const first = SPR_FIELD_ORDER.find((key) => errors[key])
   const el = first ? document.getElementById(`spr-${first}`) : null
   if (!el) return
   const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -92,8 +88,7 @@ export default function SprForm({
   }
 
   function handleBookingFeeChange(event) {
-    const digitsOnly = event.target.value.replace(/\D/g, "").slice(0, MAX_RUPIAH_DIGITS)
-    updateUnitIdentity("bookingFee", digitsOnly ? Number(digitsOnly) : 0)
+    updateUnitIdentity("bookingFee", parseRupiahInput(event.target.value))
   }
 
   function handleUnitSelect(event) {
@@ -101,36 +96,12 @@ export default function SprForm({
     clearError("unitId")
   }
 
-  function validate() {
-    const next = {}
-    const phoneDigits = buyer.noHp.replace(/\D/g, "")
-
-    if (!buyer.namaLengkap.trim()) next.namaLengkap = "Nama lengkap wajib diisi."
-    if (buyer.nikKtp.length !== 16) next.nikKtp = "NIK KTP harus 16 digit."
-    if (!buyer.noHp.trim()) next.noHp = "Nomor HP/WhatsApp wajib diisi."
-    else if (phoneDigits.length < 9 || phoneDigits.length > 15) {
-      next.noHp = "Nomor HP tidak valid (9 sampai 15 digit)."
-    }
-    if (buyer.email.trim() && !/^\S+@\S+\.\S+$/.test(buyer.email)) {
-      next.email = "Format email tidak valid."
-    }
-    if (!buyer.pekerjaan.trim()) next.pekerjaan = "Pekerjaan wajib diisi."
-    if (!buyer.alamat.trim()) next.alamat = "Alamat wajib diisi."
-    if (!unit) next.unitId = "Pilih tipe unit."
-    if (!unitIdentity.bookingFee) next.bookingFee = "Booking fee wajib diisi."
-    else if (unitIdentity.bookingFee > harga) {
-      next.bookingFee = "Booking fee tidak boleh melebihi harga jual."
-    }
-
-    setErrors(next)
-    return next
-  }
-
   function handleSubmit(event) {
     event.preventDefault()
     if (submittingRef.current) return // abaikan klik ganda: satu SPR, satu unduhan
 
-    const found = validate()
+    const found = validateSpr({ buyer, unitIdentity, unit, harga })
+    setErrors(found)
     if (Object.keys(found).length > 0) {
       focusFirstError(found)
       return

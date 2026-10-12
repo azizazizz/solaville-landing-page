@@ -1,10 +1,10 @@
 import { jsPDF } from "jspdf"
 import autoTable from "jspdf-autotable"
-import { formatRupiah } from "../../utils/currency"
-import { company } from "../../data/company"
-import { siteConfig } from "../../data/siteConfig"
+import { formatRupiah } from "./currency"
+import { company } from "../data/company"
+import { siteConfig } from "../data/siteConfig"
 // ?inline: gambar ikut tertanam sebagai data URL supaya jsPDF bisa memakainya tanpa memuat berkas lagi
-import logoMark from "../../assets/logo-mark-pdf.png?inline"
+import logoMark from "../assets/logo/logo-mark-pdf.png?inline"
 
 const HEADER_FILL = [15, 46, 32] // --color-night (#0f2e20)
 // Rasio asli monogram 185x122, ditampilkan 12 mm tinggi supaya tidak melar

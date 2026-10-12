@@ -1,12 +1,12 @@
-import { useMemo } from "react"
 import { Link } from "react-router-dom"
 import { siteConfig } from "../../data/siteConfig"
 import { contact } from "../../data/contact"
-import logoFull from "../../assets/logo-full.png"
+import logoFull from "../../assets/logo/logo-full.png"
+
+// Dihitung sekali saat modul dimuat: tahun tidak berubah selama halaman terbuka
+const YEAR = new Date().getFullYear()
 
 export default function Footer() {
-  const year = useMemo(() => new Date().getFullYear(), [])
-
   return (
     <footer className="bg-night text-on-night">
       <div className="max-w-6xl mx-auto px-5 py-14 grid gap-10 md:grid-cols-3">
@@ -48,7 +48,7 @@ export default function Footer() {
       {/* Dipisahkan dengan jalur yang lebih gelap, bukan garis */}
       <div className="bg-black/20">
         <p className="max-w-6xl mx-auto px-5 py-4 text-xs text-center text-on-night/60">
-          {year} {siteConfig.brandName}. All rights reserved.
+          {YEAR} {siteConfig.brandName}. All rights reserved.
         </p>
       </div>
     </footer>
