@@ -85,13 +85,13 @@ export default function SelesaiPage() {
         </span>
 
         <div>
-          <h2
+          <h1
             ref={headingRef}
             tabIndex={-1}
             className="text-3xl font-medium outline-none md:text-4xl"
           >
             SPR dan simulasi telah dibuat!
-          </h2>
+          </h1>
           <p className="mt-3 max-w-2xl text-on-night/80">
             Dokumen SPR dengan nomor <span className="font-medium text-on-night">{sprNumber}</span>{" "}
             sudah diunduh ke perangkat Anda. Simpan dokumen ini, lalu hubungi tim pemasaran untuk
@@ -125,7 +125,7 @@ export default function SelesaiPage() {
       </div>
 
       <div className="mt-6 rounded-3xl bg-base-alt p-6 md:p-8">
-        <h3 className="text-xl text-fg">Ringkasan</h3>
+        <h2 className="text-xl text-fg">Ringkasan</h2>
         <dl className="mt-5 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2 md:grid-cols-3">
           <SummaryItem label="Nomor SPR" value={sprNumber} />
           <SummaryItem label="Tanggal" value={tanggalLabel} />

@@ -27,6 +27,7 @@ export default function GaleriPage() {
     <>
       <section className="max-w-6xl mx-auto px-5 py-16">
         <SectionHeading
+          level={1}
           eyebrow="Galeri"
           title="Dokumentasi Kawasan Solaville"
           description="Foto berikut adalah placeholder, akan diganti dengan dokumentasi asli dari lokasi."

@@ -3,7 +3,7 @@ import { IconWhatsapp } from "../common/icons"
 
 export default function FloatingWhatsapp() {
   return (
-    <div className="group fixed bottom-5 right-5 z-40">
+    <aside aria-label="Hubungi via WhatsApp" className="group fixed bottom-5 right-5 z-40">
       <span className="pointer-events-none absolute right-full top-1/2 mr-3 -translate-y-1/2 translate-x-1 whitespace-nowrap rounded-xl bg-night px-3 py-2 text-sm text-on-night opacity-0 transition-all duration-150 group-hover:translate-x-0 group-hover:opacity-100">
         Hubungi Kami
       </span>
@@ -17,6 +17,6 @@ export default function FloatingWhatsapp() {
       >
         <IconWhatsapp className="w-7 h-7" />
       </a>
-    </div>
+    </aside>
   )
 }

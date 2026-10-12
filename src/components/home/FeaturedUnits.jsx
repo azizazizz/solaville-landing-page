@@ -17,15 +17,15 @@ export default function FeaturedUnits() {
       <Reveal>
         <SectionHeading
           eyebrow="Tipe Unit"
-          title="Pilihan tipe rumah yang paling banyak diminati"
+          title={units.length === 1 ? "Tipe rumah yang tersedia" : "Pilihan tipe rumah"}
           description="Harga berikut adalah harga mulai, dapat berubah sesuai lokasi kavling dan masa pembangunan."
         />
       </Reveal>
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-2">
+      <div className={`mt-10 grid gap-6 ${units.length === 1 ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2"}`}>
         {units.map((unit, index) => (
           <Reveal key={unit.id} delay={(index % 2) * 80}>
-            <UnitCard unit={unit} onPilih={handlePilih} />
+            <UnitCard unit={unit} onPilih={handlePilih} horizontal={units.length === 1} />
           </Reveal>
         ))}
       </div>

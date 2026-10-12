@@ -9,6 +9,7 @@ const isValid = (v) =>
   typeof v.unitId === "string" &&
   (v.unitId === "" || Boolean(getUnitById(v.unitId))) &&
   Number.isFinite(v.harga) &&
+  v.harga > 0 &&
   Number.isFinite(v.tenorBulan) &&
   Number.isFinite(v.ratePercent)
 

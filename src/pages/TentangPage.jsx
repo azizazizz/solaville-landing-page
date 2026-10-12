@@ -9,6 +9,7 @@ export default function TentangPage() {
     <>
       <section className="max-w-6xl mx-auto px-5 py-16">
         <SectionHeading
+          level={1}
           eyebrow="Tentang Kami"
           title={`Mengenal ${company.namaPerumahan}`}
           description={`Dikembangkan oleh ${company.namaDeveloper} sejak tahun ${company.tahunBerdiri}.`}

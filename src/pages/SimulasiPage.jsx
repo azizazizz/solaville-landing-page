@@ -37,6 +37,7 @@ export default function SimulasiPage() {
   return (
     <section className="max-w-6xl mx-auto px-5 py-16">
       <SectionHeading
+        level={1}
         eyebrow="Simulasi Pembelian"
         title="Hitung Estimasi Cicilan"
         description="Simulasi cicilan dihitung dari harga penuh unit tanpa uang muka. Setelah sesuai, lanjutkan membuat Surat Pesanan Rumah (SPR)."
@@ -46,11 +47,13 @@ export default function SimulasiPage() {
         <StepIndicator current={1} />
       </div>
 
-      <div className="mt-6 grid md:grid-cols-2 gap-8">
+      {/* grid-cols-1 (minmax(0,1fr)) mencegah kolom melebar mengikuti lebar <select> di layar sempit */}
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-8">
         <SimulatorForm values={values} onChange={setValues} />
         <SimulatorResult
           result={result}
           tenorBulan={values.tenorBulan}
+          canContinue={values.harga > 0}
           onContinue={() => navigate("/spr")}
         />
       </div>

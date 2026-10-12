@@ -1,23 +1,49 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
+import { units } from "../../data/units"
 import { formatRupiah, formatThousands } from "../../utils/currency"
 import { buildSprNumber, generateSprPdf } from "./SprDocument"
 
-function TextField({ label, required, error, className = "", ...inputProps }) {
+const MAX_RUPIAH_DIGITS = 11 // sampai Rp 99.999.999.999
+
+// Urutan sesuai tampilan di layar, dipakai untuk menentukan kolom error pertama
+const FIELD_ORDER = ["namaLengkap", "nikKtp", "noHp", "email", "pekerjaan", "alamat", "unitId", "bookingFee"]
+
+const inputClass = (error) =>
+  `rounded-xl bg-base px-4 py-3 text-fg outline-none ring-2 transition-shadow ${
+    error ? "ring-danger" : "ring-transparent focus:ring-primary"
+  }`
+
+function TextField({ name, label, required, error, className = "", ...inputProps }) {
+  const id = `spr-${name}`
   return (
-    <label className={`flex flex-col gap-1 ${className}`}>
+    <label htmlFor={id} className={`flex flex-col gap-1 ${className}`}>
       <span className="text-sm text-fg-soft">
         {label}
         {required ? <span className="text-danger"> *</span> : <span> (opsional)</span>}
       </span>
       <input
+        id={id}
+        aria-invalid={error ? "true" : undefined}
+        aria-describedby={error ? `${id}-error` : undefined}
         {...inputProps}
-        className={`rounded-xl bg-base px-4 py-3 text-fg outline-none ring-2 transition-shadow ${
-          error ? "ring-danger" : "ring-transparent focus:ring-primary"
-        }`}
+        className={inputClass(error)}
       />
-      {error ? <span className="text-xs text-danger">{error}</span> : null}
+      {error ? (
+        <span id={`${id}-error`} className="text-xs text-danger">
+          {error}
+        </span>
+      ) : null}
     </label>
   )
+}
+
+function focusFirstError(errors) {
+  const first = FIELD_ORDER.find((key) => errors[key])
+  const el = first ? document.getElementById(`spr-${first}`) : null
+  if (!el) return
+  const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  el.scrollIntoView({ block: "center", behavior: smooth ? "smooth" : "auto" })
+  el.focus({ preventScroll: true })
 }
 
 export default function SprForm({
@@ -30,10 +56,12 @@ export default function SprForm({
   tenorBulan,
   ratePercent,
   result,
+  onUnitChange,
   onComplete,
 }) {
   const [errors, setErrors] = useState({})
   const [submitError, setSubmitError] = useState("")
+  const submittingRef = useRef(false)
 
   function clearError(field) {
     setErrors((prev) => {
@@ -58,31 +86,58 @@ export default function SprForm({
     updateBuyer("nikKtp", event.target.value.replace(/\D/g, "").slice(0, 16))
   }
 
+  // Hanya karakter yang lazim di nomor telepon
+  function handlePhoneChange(event) {
+    updateBuyer("noHp", event.target.value.replace(/[^\d+\s()-]/g, ""))
+  }
+
   function handleBookingFeeChange(event) {
-    const digitsOnly = event.target.value.replace(/\D/g, "")
+    const digitsOnly = event.target.value.replace(/\D/g, "").slice(0, MAX_RUPIAH_DIGITS)
     updateUnitIdentity("bookingFee", digitsOnly ? Number(digitsOnly) : 0)
+  }
+
+  function handleUnitSelect(event) {
+    onUnitChange(event.target.value)
+    clearError("unitId")
   }
 
   function validate() {
     const next = {}
+    const phoneDigits = buyer.noHp.replace(/\D/g, "")
+
     if (!buyer.namaLengkap.trim()) next.namaLengkap = "Nama lengkap wajib diisi."
     if (buyer.nikKtp.length !== 16) next.nikKtp = "NIK KTP harus 16 digit."
-    if (!buyer.alamat.trim()) next.alamat = "Alamat wajib diisi."
     if (!buyer.noHp.trim()) next.noHp = "Nomor HP/WhatsApp wajib diisi."
-    if (!buyer.pekerjaan.trim()) next.pekerjaan = "Pekerjaan wajib diisi."
+    else if (phoneDigits.length < 9 || phoneDigits.length > 15) {
+      next.noHp = "Nomor HP tidak valid (9 sampai 15 digit)."
+    }
     if (buyer.email.trim() && !/^\S+@\S+\.\S+$/.test(buyer.email)) {
       next.email = "Format email tidak valid."
     }
+    if (!buyer.pekerjaan.trim()) next.pekerjaan = "Pekerjaan wajib diisi."
+    if (!buyer.alamat.trim()) next.alamat = "Alamat wajib diisi."
+    if (!unit) next.unitId = "Pilih tipe unit."
     if (!unitIdentity.bookingFee) next.bookingFee = "Booking fee wajib diisi."
+    else if (unitIdentity.bookingFee > harga) {
+      next.bookingFee = "Booking fee tidak boleh melebihi harga jual."
+    }
 
     setErrors(next)
-    return Object.keys(next).length === 0
+    return next
   }
 
-  function handleGenerate() {
-    if (!validate()) return
+  function handleSubmit(event) {
+    event.preventDefault()
+    if (submittingRef.current) return // abaikan klik ganda: satu SPR, satu unduhan
+
+    const found = validate()
+    if (Object.keys(found).length > 0) {
+      focusFirstError(found)
+      return
+    }
     setSubmitError("")
 
+    submittingRef.current = true
     const sprNumber = buildSprNumber()
     const tanggal = new Date().toISOString()
     try {
@@ -99,76 +154,103 @@ export default function SprForm({
       })
     } catch {
       // Tidak lanjut ke langkah "Selesai" bila PDF gagal dibuat
+      submittingRef.current = false
       setSubmitError("SPR gagal dibuat. Periksa isian Anda lalu coba lagi.")
       return
     }
     onComplete({ sprNumber, tanggal })
   }
 
+  const errorCount = Object.keys(errors).length
+
   return (
-    <div className="rounded-3xl bg-base-alt p-6 md:p-8 flex flex-col gap-8">
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      className="rounded-3xl bg-base-alt p-6 md:p-8 flex flex-col gap-8"
+    >
       <p className="text-sm text-fg-soft">
         Field bertanda <span className="text-danger">*</span> wajib diisi.
       </p>
 
       <div>
-        <h4 className="text-fg font-medium mb-4">Data Diri</h4>
-        <div className="grid sm:grid-cols-2 gap-4">
+        <h2 className="text-fg font-medium mb-4">Data Diri</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <TextField
+            name="namaLengkap"
             label="Nama Lengkap"
             required
             value={buyer.namaLengkap}
             error={errors.namaLengkap}
             onChange={(event) => updateBuyer("namaLengkap", event.target.value)}
+            autoComplete="name"
             placeholder="Sesuai KTP"
           />
           <TextField
+            name="nikKtp"
             label="NIK KTP"
             required
             value={buyer.nikKtp}
             error={errors.nikKtp}
             onChange={handleNikChange}
             inputMode="numeric"
+            autoComplete="off"
             maxLength={16}
             placeholder="16 digit sesuai KTP"
           />
           <TextField
+            name="npwp"
             label="NPWP"
             value={buyer.npwp}
             onChange={(event) => updateBuyer("npwp", event.target.value)}
+            autoComplete="off"
+            maxLength={25}
             placeholder="Jika ada"
           />
           <TextField
+            name="noHp"
             label="No. HP / WhatsApp"
             required
             value={buyer.noHp}
             error={errors.noHp}
-            onChange={(event) => updateBuyer("noHp", event.target.value)}
+            onChange={handlePhoneChange}
+            type="tel"
             inputMode="tel"
+            autoComplete="tel"
+            maxLength={20}
             placeholder="08xxxxxxxxxx"
           />
           <TextField
+            name="email"
             label="Email"
             value={buyer.email}
             error={errors.email}
             onChange={(event) => updateBuyer("email", event.target.value)}
             type="email"
+            autoComplete="email"
+            maxLength={100}
             placeholder="nama@email.com"
           />
           <TextField
+            name="pekerjaan"
             label="Pekerjaan"
             required
             value={buyer.pekerjaan}
             error={errors.pekerjaan}
             onChange={(event) => updateBuyer("pekerjaan", event.target.value)}
+            autoComplete="organization-title"
+            maxLength={60}
             placeholder="Contoh: Karyawan Swasta"
           />
           <TextField
+            name="alamat"
             label="Alamat"
             required
             value={buyer.alamat}
             error={errors.alamat}
             onChange={(event) => updateBuyer("alamat", event.target.value)}
+            autoComplete="street-address"
+            maxLength={200}
             placeholder="Alamat sesuai KTP"
             className="sm:col-span-2"
           />
@@ -176,22 +258,59 @@ export default function SprForm({
       </div>
 
       <div>
-        <h4 className="text-fg font-medium mb-4">Data Unit</h4>
-        <div className="grid sm:grid-cols-2 gap-4">
+        <h2 className="text-fg font-medium mb-4">Data Unit</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Harga diisi manual di simulasi: SPR tetap butuh tipe & luas, jadi tipe dipilih di sini */}
+          {!unit ? (
+            <label htmlFor="spr-unitId" className="flex flex-col gap-1 sm:col-span-2">
+              <span className="text-sm text-fg-soft">
+                Tipe Unit<span className="text-danger"> *</span>
+              </span>
+              <select
+                id="spr-unitId"
+                value=""
+                onChange={handleUnitSelect}
+                aria-invalid={errors.unitId ? "true" : undefined}
+                aria-describedby={errors.unitId ? "spr-unitId-error" : undefined}
+                className={inputClass(errors.unitId)}
+              >
+                <option value="" disabled>
+                  Pilih tipe unit
+                </option>
+                {units.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.nama}
+                  </option>
+                ))}
+              </select>
+              {errors.unitId ? (
+                <span id="spr-unitId-error" className="text-xs text-danger">
+                  {errors.unitId}
+                </span>
+              ) : null}
+            </label>
+          ) : null}
+
           <TextField
+            name="blok"
             label="Blok"
             value={unitIdentity.blok}
             onChange={(event) => updateUnitIdentity("blok", event.target.value)}
+            autoComplete="off"
+            maxLength={10}
             placeholder="Contoh: A"
           />
           <TextField
+            name="noUnit"
             label="No. Unit"
             value={unitIdentity.noUnit}
             onChange={(event) => updateUnitIdentity("noUnit", event.target.value)}
+            autoComplete="off"
+            maxLength={10}
             placeholder="Contoh: 12"
           />
 
-          <label className="flex flex-col gap-1 sm:col-span-2">
+          <label htmlFor="spr-bookingFee" className="flex flex-col gap-1 sm:col-span-2">
             <span className="text-sm text-fg-soft">
               Booking Fee<span className="text-danger"> *</span>
             </span>
@@ -202,15 +321,23 @@ export default function SprForm({
             >
               <span className="shrink-0 pl-4 text-fg-soft">Rp</span>
               <input
+                id="spr-bookingFee"
                 type="text"
                 inputMode="numeric"
-                value={formatThousands(unitIdentity.bookingFee)}
+                autoComplete="off"
+                value={unitIdentity.bookingFee ? formatThousands(unitIdentity.bookingFee) : ""}
                 onChange={handleBookingFeeChange}
+                aria-invalid={errors.bookingFee ? "true" : undefined}
+                aria-describedby={errors.bookingFee ? "spr-bookingFee-error" : undefined}
                 placeholder="0"
                 className="min-w-0 flex-1 bg-transparent px-2 py-3 text-fg outline-none"
               />
             </div>
-            {errors.bookingFee ? <span className="text-xs text-danger">{errors.bookingFee}</span> : null}
+            {errors.bookingFee ? (
+              <span id="spr-bookingFee-error" className="text-xs text-danger">
+                {errors.bookingFee}
+              </span>
+            ) : null}
           </label>
         </div>
 
@@ -228,18 +355,22 @@ export default function SprForm({
 
       <div className="flex flex-col items-start gap-3">
         <button
-          type="button"
-          onClick={handleGenerate}
+          type="submit"
           className="rounded-xl bg-primary px-6 py-3 text-on-primary transition-colors hover:bg-primary-dark"
         >
           Buat SPR (PDF)
         </button>
+        {errorCount > 0 ? (
+          <p role="alert" className="text-sm text-danger">
+            Ada {errorCount} isian yang perlu diperbaiki. Periksa kolom yang bertanda merah.
+          </p>
+        ) : null}
         {submitError ? (
           <p role="alert" className="text-sm text-danger">
             {submitError}
           </p>
         ) : null}
       </div>
-    </div>
+    </form>
   )
 }

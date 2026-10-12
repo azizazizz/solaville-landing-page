@@ -6,6 +6,7 @@ export default function KontakPage() {
   return (
     <section className="max-w-6xl mx-auto px-5 py-16">
       <SectionHeading
+        level={1}
         eyebrow="Kontak"
         title="Hubungi Tim Pemasaran Kami"
         description="Datang langsung ke kantor pemasaran atau hubungi kami melalui WhatsApp dan email."

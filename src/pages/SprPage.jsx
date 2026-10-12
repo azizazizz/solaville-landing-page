@@ -21,7 +21,7 @@ function SummaryItem({ label, value, highlight = false }) {
 function UnitPicker({ onPick }) {
   return (
     <div className="mt-8 rounded-3xl bg-base-alt p-6 md:p-8">
-      <h3 className="text-xl text-fg">Pilih Tipe Unit</h3>
+      <h2 className="text-xl text-fg">Pilih Tipe Unit</h2>
       <p className="mt-1 max-w-xl text-sm text-fg-soft">
         Pilih tipe unit yang ingin dipesan untuk melanjutkan. Ingin menghitung cicilan dulu?{" "}
         <Link
@@ -54,14 +54,18 @@ function UnitPicker({ onPick }) {
   )
 }
 
+// Bila katalog hanya punya satu tipe, tidak ada yang perlu dipilih: SPR otomatis untuk tipe itu
+const ONLY_UNIT = units.length === 1 ? units[0] : undefined
+
 export default function SprPage() {
   const location = useLocation()
   const navigate = useNavigate()
-  // Prioritas: unit dari tombol "Pesan Unit Ini", lalu simulasi tersimpan. Tanpa keduanya tidak ada
-  // nilai bawaan: pengunjung diminta memilih unit dulu.
+  // Prioritas: unit dari tombol "Pesan Unit Ini", lalu simulasi tersimpan, lalu (jika hanya ada satu
+  // tipe) tipe itu. Selain itu tidak ada nilai bawaan tersembunyi: pengunjung diminta memilih unit.
   const [simulasi, setSimulasi] = useState(() => {
     const unitFromState = getUnitById(location.state?.unitId)
-    return unitFromState ? simulationForUnit(unitFromState) : loadSimulation()
+    if (unitFromState) return simulationForUnit(unitFromState)
+    return loadSimulation() ?? (ONLY_UNIT ? simulationForUnit(ONLY_UNIT) : null)
   })
   const [buyer, setBuyer] = useState(() => getSprDraft().buyer)
   const [unitIdentity, setUnitIdentity] = useState(() => getSprDraft().unitIdentity)
@@ -74,7 +78,8 @@ export default function SprPage() {
     saveSprDraft({ buyer, unitIdentity })
   }, [buyer, unitIdentity])
 
-  const unit = simulasi ? getUnitById(simulasi.unitId) : undefined
+  // Harga manual di simulasi tetap dipakai, tetapi tipenya otomatis bila hanya ada satu tipe
+  const unit = simulasi ? (getUnitById(simulasi.unitId) ?? ONLY_UNIT) : undefined
   const result = useMemo(
     () =>
       simulasi
@@ -88,15 +93,28 @@ export default function SprPage() {
     if (picked) setSimulasi(simulationForUnit(picked))
   }
 
+  // Dipakai saat harga diisi manual di simulasi (belum ada tipe): harga tetap, tipe ditambahkan
+  function handleUnitChange(unitId) {
+    setSimulasi((prev) => (prev ? { ...prev, unitId } : prev))
+  }
+
   // Simpan salinan SPR yang baru dibuat (untuk ringkasan dan unduh ulang), lalu ke langkah 3
   function handleComplete({ sprNumber, tanggal }) {
-    saveCompletedSpr({ sprNumber, tanggal, buyer, unitIdentity, simulasi })
+    // unitId disimpan sudah terselesaikan, supaya unduh ulang di halaman Selesai persis sama
+    saveCompletedSpr({
+      sprNumber,
+      tanggal,
+      buyer,
+      unitIdentity,
+      simulasi: { ...simulasi, unitId: unit ? unit.id : simulasi.unitId },
+    })
     navigate("/selesai")
   }
 
   return (
     <section className="max-w-6xl mx-auto px-5 py-16">
       <SectionHeading
+        level={1}
         eyebrow="Surat Pesanan Rumah"
         title="Lengkapi Data Pemesanan"
         description="Isi data diri dan data unit untuk membuat dokumen SPR dalam bentuk PDF. Data diproses di perangkat Anda dan tidak dikirim ke server."
@@ -112,7 +130,7 @@ export default function SprPage() {
         <>
           <div className="mt-6 rounded-3xl bg-base-alt p-6 md:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h3 className="text-xl text-fg">Ringkasan Simulasi</h3>
+              <h2 className="text-xl text-fg">Ringkasan Simulasi</h2>
               <Link
                 to="/simulasi"
                 className="-my-3 py-3 text-sm uppercase tracking-wide text-fg underline decoration-fg/30 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
@@ -145,6 +163,7 @@ export default function SprPage() {
               tenorBulan={simulasi.tenorBulan}
               ratePercent={simulasi.ratePercent}
               result={result}
+              onUnitChange={handleUnitChange}
               onComplete={handleComplete}
             />
           </div>

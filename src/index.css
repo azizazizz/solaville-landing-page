@@ -76,16 +76,17 @@
 .dark {
   --color-base: #0c2033;
   --color-base-alt: #15314a;
-  /* Sedikit lebih terang dari turunan proporsional (#2e8fc0), supaya kontras terhadap
-     --color-base gelap punya margin lebih aman (~5.3:1) daripada pas-pasan di ambang 4.5:1 */
-  --color-primary: #349bd1;
+  /* Cukup terang agar lolos 4,5:1 bukan hanya di atas --color-base (5,9:1) tetapi juga di atas
+     panel --color-base-alt (4,8:1); nilai sebelumnya (#349bd1) hanya 4,3:1 di atas panel */
+  --color-primary: #3fa4d9;
   /* Warna hover tombol: di dark mode justru lebih terang, supaya teks gelap di atasnya tetap kontras */
   --color-primary-dark: #5db4e3;
   /* Teks di atas tombol primary: gelap di dark mode (kontras 4,8:1; putih hanya 2,9:1) */
   --color-on-primary: #052a40;
   --color-fg: #eaf4fb;
   --color-fg-soft: #9fb8c8;
-  --color-danger: #e57373;
+  /* 4,9:1 di atas panel --color-base-alt (nilai sebelumnya #e57373 hanya 4,47:1) */
+  --color-danger: #ea7d7d;
 }
 
 /* Fokus keyboard yang jelas untuk semua elemen interaktif; input memakai ring sendiri (lihat komponen form) */

@@ -25,6 +25,12 @@ export const company = {
       tautan: { teks: "Coba simulasi cicilan", ke: "/simulasi" },
     },
     {
+      judul: "Bonus AC dan TV",
+      deskripsi:
+        "Dapatkan bonus AC dan TV untuk pembelian unit di Solaville. Syarat dan ketentuan berlaku.",
+      tautan: { teks: "Cek unit tersedia", ke: "/unit" },
+    },
+    {
       judul: "Akses ke Jalan Tol",
       deskripsi:
         "Jarak tempuh sekitar 10 menit berkendara ke Gerbang Tol Sukaragam (Tol Jakarta-Cikampek 2 Selatan), memudahkan mobilitas harian menuju Jakarta maupun kawasan industri Bekasi.",

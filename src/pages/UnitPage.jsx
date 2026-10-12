@@ -12,9 +12,10 @@ export default function UnitPage() {
     <>
       <section className="max-w-6xl mx-auto px-5 py-16">
         <SectionHeading
+          level={1}
           eyebrow="Tipe Unit"
-          title="Semua Tipe Rumah di Solaville"
-          description="Klik salah satu unit untuk melihat detail spesifikasi, foto, dan harga mulai."
+          title="Tipe Rumah di Solaville"
+          description="Buka detail unit untuk melihat spesifikasi, foto, dan harga mulai."
         />
 
         <div className="mt-10">

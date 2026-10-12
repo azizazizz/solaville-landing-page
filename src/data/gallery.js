@@ -10,8 +10,8 @@ export const gallery = [
   {
     id: "gal-01",
     kategori: "eksterior",
-    alt: "Tampak depan rumah tipe 45 dengan carport",
-    label: "Fasad Tipe 45",
+    alt: "Tampak depan rumah tipe 36 dengan carport",
+    label: "Fasad Tipe 36",
   },
   {
     id: "gal-02",
@@ -23,19 +23,19 @@ export const gallery = [
     id: "gal-03",
     kategori: "interior",
     alt: "Ruang tamu dan ruang keluarga konsep terbuka",
-    label: "Ruang Keluarga Tipe 45",
+    label: "Ruang Keluarga Tipe 36",
   },
   {
     id: "gal-04",
     kategori: "interior",
     alt: "Kamar tidur utama dengan jendela besar",
-    label: "Kamar Utama Tipe 45",
+    label: "Kamar Tidur Tipe 36",
   },
   {
     id: "gal-05",
     kategori: "interior",
     alt: "Dapur bersih dengan kabinet atas dan bawah",
-    label: "Dapur Tipe 45",
+    label: "Dapur Tipe 36",
   },
   {
     id: "gal-06",
