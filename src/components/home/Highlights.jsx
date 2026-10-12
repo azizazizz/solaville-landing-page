@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { company } from "../../data/company"
 import SectionHeading from "../common/SectionHeading"
-import PlaceholderImage from "../common/PlaceholderImage"
+import Photo from "../common/Photo"
 import Reveal from "../common/Reveal"
 
 export default function Highlights() {
@@ -26,7 +26,8 @@ export default function Highlights() {
                 reversed ? "md:[&>*:first-child]:order-2" : ""
               }`}
             >
-              <PlaceholderImage
+              <Photo
+                name={item.gambar}
                 label={item.judul}
                 category={index % 2 === 0 ? "lingkungan" : "fasilitas"}
                 className="h-56 w-full rounded-2xl"

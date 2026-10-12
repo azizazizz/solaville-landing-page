@@ -21,7 +21,12 @@ export const units = [
       "Kusen pintu dan jendela aluminium",
       "Instalasi listrik 2200 watt, air PDAM dan sumur bor",
     ],
-    gambar: ["tipe-36-eksterior", "tipe-36-ruang-tamu", "tipe-36-kamar"],
+    // id = nama berkas di src/assets/images/unit (tanpa ekstensi)
+    gambar: [
+      { id: "tipe-36-eksterior", alt: "Tampak depan rumah Tipe 36 dengan carport" },
+      { id: "tipe-36-ruang-tamu", alt: "Ruang tamu dan ruang keluarga Tipe 36" },
+      { id: "tipe-36-kamar", alt: "Kamar tidur utama Tipe 36" },
+    ],
   },
 ]
 

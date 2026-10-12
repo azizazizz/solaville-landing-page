@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { formatRupiah } from "../../utils/currency"
-import PlaceholderImage from "../common/PlaceholderImage"
+import Photo from "../common/Photo"
 import Reveal from "../common/Reveal"
 import { IconArea, IconBath, IconBed, IconClose } from "../common/icons"
 import UnitCard from "./UnitCard"
@@ -71,10 +71,12 @@ export default function UnitList({ units, initialSelectedId }) {
 
             <div className="p-6 pt-4 md:p-8 md:pt-4 flex flex-col gap-6">
               <div className="grid grid-cols-3 gap-3">
-                {selectedUnit.gambar.map((gambarId) => (
-                  <PlaceholderImage
-                    key={gambarId}
-                    label={gambarId}
+                {selectedUnit.gambar.map((gambar) => (
+                  <Photo
+                    key={gambar.id}
+                    name={`unit/${gambar.id}`}
+                    alt={gambar.alt}
+                    label={gambar.alt}
                     category="eksterior"
                     className="h-28 w-full rounded-xl"
                   />

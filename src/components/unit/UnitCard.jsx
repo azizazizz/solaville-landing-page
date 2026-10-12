@@ -1,5 +1,5 @@
 import { formatRupiah } from "../../utils/currency"
-import PlaceholderImage from "../common/PlaceholderImage"
+import Photo from "../common/Photo"
 import { IconArea, IconBath, IconBed } from "../common/icons"
 
 // horizontal: dipakai saat hanya ada satu tipe, supaya kartu tunggal tidak terlihat "kesepian"
@@ -11,7 +11,9 @@ export default function UnitCard({ unit, onPilih, horizontal = false }) {
         horizontal ? "flex-col md:flex-row" : "flex-col"
       }`}
     >
-      <PlaceholderImage
+      <Photo
+        name={`unit/${unit.gambar[0].id}`}
+        alt={unit.gambar[0].alt}
         label={unit.nama}
         category="eksterior"
         className={`h-48 w-full ${horizontal ? "md:h-auto md:min-h-72 md:w-1/2" : ""}`}

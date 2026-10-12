@@ -1,4 +1,4 @@
-import ImagePlaceholder from "../common/ImagePlaceholder"
+import Photo from "../common/Photo"
 
 export default function GalleryGrid({ items, onSelect }) {
   return (
@@ -11,11 +11,12 @@ export default function GalleryGrid({ items, onSelect }) {
           className="group block overflow-hidden rounded-2xl text-left"
         >
           {/* Zoom 5% hanya pada isi thumbnail: menandai bahwa seluruh kotak bisa diklik untuk dibuka besar */}
-          <ImagePlaceholder
+          <Photo
+            name={`galeri/${item.id}`}
+            alt={item.alt}
             label={item.label}
             category={item.kategori}
             className="h-40 w-full transition-transform duration-500 ease-out group-hover:scale-105 group-focus-visible:scale-105"
-            loadDelay={250 + (index % 4) * 150}
           />
         </button>
       ))}

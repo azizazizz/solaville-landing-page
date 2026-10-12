@@ -1,6 +1,6 @@
 import { company } from "../data/company"
 import SectionHeading from "../components/common/SectionHeading"
-import PlaceholderImage from "../components/common/PlaceholderImage"
+import Photo from "../components/common/Photo"
 import Reveal from "../components/common/Reveal"
 import HomeCTA from "../components/home/HomeCTA"
 
@@ -16,7 +16,9 @@ export default function TentangPage() {
         />
 
         <div className="mt-10 grid md:grid-cols-2 gap-10 items-start">
-          <PlaceholderImage
+          <Photo
+            name="hero/tentang"
+            alt={`Kawasan ${company.namaPerumahan} dilihat dari ketinggian, deretan rumah di antara area hijau`}
             label={`Kawasan ${company.namaPerumahan}`}
             category="lingkungan"
             className="h-80 w-full rounded-2xl"

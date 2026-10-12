@@ -5,6 +5,7 @@ import { gallery, galleryCategories } from "../data/gallery"
 import SectionHeading from "../components/common/SectionHeading"
 import PlaceholderImage from "../components/common/PlaceholderImage"
 import GalleryGrid from "../components/galeri/GalleryGrid"
+import { getImageUrl } from "../utils/images"
 import HomeCTA from "../components/home/HomeCTA"
 
 export default function GaleriPage() {
@@ -17,7 +18,7 @@ export default function GaleriPage() {
       : gallery.filter((item) => item.kategori === activeCategory)
 
   const slides = items.map((item) => ({
-    src: "",
+    src: getImageUrl(`galeri/${item.id}`) ?? "",
     alt: item.alt,
     label: item.label,
     kategori: item.kategori,
@@ -30,7 +31,7 @@ export default function GaleriPage() {
           level={1}
           eyebrow="Galeri"
           title="Dokumentasi Kawasan Solaville"
-          description="Foto berikut adalah placeholder, akan diganti dengan dokumentasi asli dari lokasi."
+          description="Gambar berikut masih ilustrasi contoh dan akan diganti dengan dokumentasi asli dari lokasi."
         />
 
         <div className="mt-8 flex flex-wrap gap-3">
@@ -65,13 +66,15 @@ export default function GaleriPage() {
           index={lightboxIndex}
           slides={slides}
           render={{
-            slide: ({ slide }) => (
-              <PlaceholderImage
-                label={slide.label}
-                category={slide.kategori}
-                className="w-[80vw] max-w-2xl h-[60vh] rounded-3xl"
-              />
-            ),
+            // Slide tanpa berkas gambar tampil sebagai placeholder; yang punya gambar memakai tampilan bawaan
+            slide: ({ slide }) =>
+              slide.src ? undefined : (
+                <PlaceholderImage
+                  label={slide.label}
+                  category={slide.kategori}
+                  className="w-[80vw] max-w-2xl h-[60vh] rounded-3xl"
+                />
+              ),
           }}
         />
       </section>
