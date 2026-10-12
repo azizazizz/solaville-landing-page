@@ -2,6 +2,8 @@ import { useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 import { siteConfig } from "../../data/siteConfig"
 import { IconClose, IconMenu } from "../common/icons"
+import logoMark from "../../assets/logo-mark.png"
+import logoWordmark from "../../assets/logo-wordmark.png"
 import ThemeToggle from "./ThemeToggle"
 
 const NAV_LINKS = [
@@ -33,8 +35,16 @@ export default function Navbar() {
   return (
     <header className="bg-base">
       <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
-        <NavLink to="/" className="font-display text-xl text-fg">
-          {siteConfig.brandName}
+        {/* Logo: monogram + tulisan. Nama aksesibel tautan berasal dari alt tulisan; monogram dekoratif. */}
+        <NavLink to="/" className="flex items-center gap-2.5">
+          <img src={logoMark} alt="" width="191" height="128" className="h-10 w-auto" />
+          <img
+            src={logoWordmark}
+            alt={siteConfig.brandName}
+            width="560"
+            height="105"
+            className="h-4 w-auto"
+          />
         </NavLink>
 
         <nav className="hidden md:flex items-center gap-8">

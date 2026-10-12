@@ -2,11 +2,11 @@ import { IconHouse } from "./icons"
 
 // Dibedakan lewat warna isi, bukan garis tepi. Radius ditentukan pemanggil/pembungkusnya.
 const TONES = {
-  eksterior: "bg-sky/35",
+  eksterior: "bg-primary/15",
   interior: "bg-base-alt",
-  fasilitas: "bg-sun/40",
-  lingkungan: "bg-sky/30",
-  default: "bg-sky/35",
+  fasilitas: "bg-gold/25",
+  lingkungan: "bg-primary/10",
+  default: "bg-primary/15",
 }
 
 /**

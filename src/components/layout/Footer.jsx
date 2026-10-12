@@ -2,6 +2,7 @@ import { useMemo } from "react"
 import { Link } from "react-router-dom"
 import { siteConfig } from "../../data/siteConfig"
 import { contact } from "../../data/contact"
+import logoFull from "../../assets/logo-full.png"
 
 export default function Footer() {
   const year = useMemo(() => new Date().getFullYear(), [])
@@ -10,12 +11,19 @@ export default function Footer() {
     <footer className="bg-night text-on-night">
       <div className="max-w-6xl mx-auto px-5 py-14 grid gap-10 md:grid-cols-3">
         <div>
-          <p className="font-display text-xl">{siteConfig.brandName}</p>
+          <img
+            src={logoFull}
+            alt={siteConfig.brandName}
+            width="720"
+            height="421"
+            loading="lazy"
+            className="h-24 w-auto"
+          />
           <p className="mt-3 text-sm text-on-night/70 max-w-xs">{siteConfig.tagline}</p>
         </div>
 
         <div className="flex flex-col gap-2 text-sm text-on-night/80">
-          <p className="uppercase tracking-wide text-on-night/50 text-xs mb-1">Navigasi</p>
+          <p className="uppercase tracking-wide text-on-night/60 text-xs mb-1">Navigasi</p>
           <Link to="/tentang" className="hover:text-on-night">Tentang Kami</Link>
           <Link to="/unit" className="hover:text-on-night">Tipe Unit</Link>
           <Link to="/galeri" className="hover:text-on-night">Galeri</Link>
@@ -24,7 +32,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col gap-2 text-sm text-on-night/80">
-          <p className="uppercase tracking-wide text-on-night/50 text-xs mb-1">Informasi</p>
+          <p className="uppercase tracking-wide text-on-night/60 text-xs mb-1">Informasi</p>
           <p>{contact.alamat}</p>
           <p>{contact.telepon}</p>
           <p>{contact.email}</p>

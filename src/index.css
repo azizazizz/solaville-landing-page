@@ -7,29 +7,32 @@
   --font-display: "Montserrat", sans-serif;
   --font-body: "Mulish", sans-serif;
 
-  /* Base palette from https://colorhunt.co/palette/0061998acff8f4eb6cffd444 */
-  /* Token adaptif: nilainya berbeda di light vs dark mode (lihat blok .dark di bawah) */
-  --color-base: #f5fafe;
-  --color-base-alt: #e3f2fc;
-  --color-primary: #006199;
-  --color-primary-dark: #004a75;
-  --color-on-primary: #f2f8fd;
-  --color-fg: #052a40;
-  --color-fg-soft: #3e6075;
+  /*
+   * Palet diambil dari logo Solaville: hijau hutan (daun dan huruf SV) sebagai warna utama,
+   * emas (garis dan tulisan SOLA VILLE) sebagai satu-satunya aksen, krem hangat sebagai netral.
+   * Token adaptif: nilainya berbeda di light vs dark mode (lihat blok .dark di bawah).
+   */
+  --color-base: #faf8f2;
+  --color-base-alt: #eee9da;
+  --color-primary: #1f5a3b;
+  --color-primary-dark: #134029;
+  --color-on-primary: #faf8f2;
+  --color-fg: #14261b;
+  --color-fg-soft: #4b5a4f;
 
-  /* Aksen vivid, nilainya sama di kedua mode */
-  --color-sky: #8acff8;
-  --color-sun: #f4eb6c;
+  /* Aksen emas, nilainya sama di kedua mode. gold dipakai di atas panel gelap, gold-soft sebagai tint */
+  --color-gold: #d4a94a;
+  --color-gold-soft: #e4cc84;
   --color-whatsapp: #25d366;
   --color-whatsapp-dark: #1da851;
 
   /* Khusus validasi form (adaptif, lihat blok .dark di bawah) */
-  --color-danger: #c23b3b;
+  --color-danger: #b83232;
 
   /* Token tetap: panel yang memang harus selalu gelap (footer, overlay modal, tombol SPR) */
-  --color-night: #052a40;
-  --color-night-soft: #0a3c59;
-  --color-on-night: #f2f8fd;
+  --color-night: #0f2e20;
+  --color-night-soft: #174230;
+  --color-on-night: #f6f3e8;
 
   /*
    * Animasi dipakai terbatas dan masing-masing punya tujuan UX (lihat catatan di tiap komponen).
@@ -74,19 +77,17 @@
 }
 
 .dark {
-  --color-base: #0c2033;
-  --color-base-alt: #15314a;
-  /* Cukup terang agar lolos 4,5:1 bukan hanya di atas --color-base (5,9:1) tetapi juga di atas
-     panel --color-base-alt (4,8:1); nilai sebelumnya (#349bd1) hanya 4,3:1 di atas panel */
-  --color-primary: #3fa4d9;
+  --color-base: #0d1a12;
+  --color-base-alt: #162a1e;
+  /* Hijau dilunakkan agar terbaca di latar gelap: kontras 8,1:1 di atas base dan 6,9:1 di atas panel */
+  --color-primary: #6dbf8e;
   /* Warna hover tombol: di dark mode justru lebih terang, supaya teks gelap di atasnya tetap kontras */
-  --color-primary-dark: #5db4e3;
-  /* Teks di atas tombol primary: gelap di dark mode (kontras 4,8:1; putih hanya 2,9:1) */
-  --color-on-primary: #052a40;
-  --color-fg: #eaf4fb;
-  --color-fg-soft: #9fb8c8;
-  /* 4,9:1 di atas panel --color-base-alt (nilai sebelumnya #e57373 hanya 4,47:1) */
-  --color-danger: #ea7d7d;
+  --color-primary-dark: #8fd0a9;
+  /* Teks di atas tombol primary: gelap di dark mode (kontras 7,9:1) */
+  --color-on-primary: #0a1d12;
+  --color-fg: #f0eee3;
+  --color-fg-soft: #a8b8ab;
+  --color-danger: #ee8a8a;
 }
 
 /* Fokus keyboard yang jelas untuk semua elemen interaktif; input memakai ring sendiri (lihat komponen form) */

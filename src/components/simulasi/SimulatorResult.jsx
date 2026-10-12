@@ -13,7 +13,7 @@ export default function SimulatorResult({ result, tenorBulan, canContinue = true
 
       <div className="flex flex-col gap-1">
         <span className="text-sm text-on-night/70">Estimasi Cicilan per Bulan</span>
-        <span className="text-4xl font-medium text-sky tabular-nums">
+        <span className="text-4xl font-medium text-gold tabular-nums">
           {formatRupiah(Math.round(monthlyInstallment))}
         </span>
       </div>
@@ -38,7 +38,7 @@ export default function SimulatorResult({ result, tenorBulan, canContinue = true
           type="button"
           onClick={onContinue}
           disabled={!canContinue}
-          className="rounded-xl bg-sky px-6 py-3 font-medium text-night transition-colors hover:bg-on-night disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-sky"
+          className="rounded-xl bg-gold px-6 py-3 font-medium text-night transition-colors hover:bg-on-night disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gold"
         >
           Lanjut Buat SPR
         </button>

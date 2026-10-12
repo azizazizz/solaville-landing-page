@@ -25,3 +25,5 @@ anti-slop/
 *.njsproj
 *.sln
 *.sw?
+
+.env

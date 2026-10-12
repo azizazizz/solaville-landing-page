@@ -3,8 +3,13 @@ import autoTable from "jspdf-autotable"
 import { formatRupiah } from "../../utils/currency"
 import { company } from "../../data/company"
 import { siteConfig } from "../../data/siteConfig"
+// ?inline: gambar ikut tertanam sebagai data URL supaya jsPDF bisa memakainya tanpa memuat berkas lagi
+import logoMark from "../../assets/logo-mark-pdf.png?inline"
 
-const HEADER_FILL = [5, 42, 64] // --color-night (#052a40)
+const HEADER_FILL = [15, 46, 32] // --color-night (#0f2e20)
+// Rasio asli monogram 185x122, ditampilkan 12 mm tinggi supaya tidak melar
+const LOGO_HEIGHT_MM = 12
+const LOGO_WIDTH_MM = LOGO_HEIGHT_MM * (185 / 122)
 
 export function buildSprNumber() {
   const now = new Date()
@@ -50,6 +55,8 @@ export function generateSprPdf({
     month: "long",
     year: "numeric",
   })
+
+  doc.addImage(logoMark, "PNG", 14, 10, LOGO_WIDTH_MM, LOGO_HEIGHT_MM)
 
   doc.setFont("helvetica", "bold")
   doc.setFontSize(16)

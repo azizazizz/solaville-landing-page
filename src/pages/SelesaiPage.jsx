@@ -80,7 +80,7 @@ export default function SelesaiPage() {
       <StepIndicator current={3} />
 
       <div className="mt-6 flex flex-col gap-6 rounded-3xl bg-night p-6 text-on-night md:p-10">
-        <span className="animate-pop-in flex h-14 w-14 items-center justify-center rounded-full bg-sky text-night">
+        <span className="animate-pop-in flex h-14 w-14 items-center justify-center rounded-full bg-gold text-night">
           <IconCheck className="h-7 w-7" />
         </span>
 
