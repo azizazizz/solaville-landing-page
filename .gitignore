@@ -28,3 +28,5 @@ anti-slop/
 
 .env
 .env.example
+# Berkas mentah/rahasia yang tidak boleh ikut ke Git atau hosting (master gambar, dokumen internal)
+private/

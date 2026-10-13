@@ -20,7 +20,7 @@ design/                  Master desain (logo resolusi tinggi). Tidak dipakai lan
 src/
   assets/
     logo/                Logo yang dipakai situs (navbar, footer, PDF)
-    images/{hero,keunggulan,unit,galeri}/   Foto properti (sekarang ilustrasi contoh, lihat Mengganti Foto)
+    images/{hero,keunggulan,unit,galeri}/   Gambar properti (lihat Mengganti Foto)
   components/
     common/              Dipakai banyak halaman: Reveal, SectionHeading, icons, placeholder gambar
     layout/              Navbar, Footer, ThemeToggle, FloatingWhatsapp, ScrollToTop
@@ -46,14 +46,14 @@ Konten ada di `src/data/*.js` dan bisa diganti tanpa menyentuh komponen:
 
 ## Mengganti Foto
 
-Seluruh gambar di `src/assets/images/` sekarang berupa **ilustrasi contoh** (bertanda "Ilustrasi contoh" di
-dalam gambar) agar tampilan situs bisa dinilai sebelum foto asli tersedia. Gambar dikenali lewat nama berkas
-tanpa ekstensi, jadi untuk mengganti cukup taruh foto asli dengan **nama yang sama** (jpg, png, webp, atau avif)
-dan hapus berkas contohnya. Tidak ada kode yang perlu diubah.
+Gambar di `src/assets/images/` sekarang adalah **visualisasi buatan AI**, bukan foto lokasi. Gambar dikenali lewat
+nama berkas tanpa ekstensi, jadi untuk mengganti dengan foto asli cukup taruh foto dengan **nama yang sama**
+(jpg, png, webp, atau avif) dan hapus berkas lamanya. Tidak ada kode yang perlu diubah. Berkas mentah (resolusi
+penuh) disimpan di `private/`, yang tidak ikut ke Git maupun hosting.
 
 | Folder        | Dipakai di                              | Nama berkas                                              |
 | ------------- | --------------------------------------- | -------------------------------------------------------- |
-| `hero/`       | Beranda dan halaman Tentang             | `beranda`, `tentang`                                     |
+| `hero/`       | Beranda                                 | `beranda`                                                |
 | `keunggulan/` | Bagian "Mengapa Solaville" di Beranda   | sesuai field `gambar` di `data/company.js`               |
 | `unit/`       | Kartu dan detail unit                   | sesuai field `gambar[].id` di `data/units.js`            |
 | `galeri/`     | Halaman Galeri dan lightbox             | `gal-01`, `gal-02`, dan seterusnya sesuai `id` di `data/gallery.js` |
@@ -74,6 +74,7 @@ Hasil simulasi disimpan di sessionStorage. Data pribadi pemesan hanya ada di mem
 
 ## Catatan
 
-- Teks "ilustrasi contoh" pada halaman Galeri perlu dihapus setelah semua foto diganti dengan dokumentasi asli.
+- Gambar sekarang visualisasi AI. Setelah semuanya diganti dokumentasi asli, hapus keterangan "visualisasi ilustratif": komponen `ImageNote` (dipakai di Beranda dan Unit) dan kalimat di `GaleriPage.jsx`.
+- Tulisan pada papan gerbang tol dan sekolah di gambar sudah dikosongkan agar tidak bertentangan dengan teks di `data/company.js`. Foto asli yang memuat papan nama harus sesuai dengan teks tersebut.
 - Halaman Syarat & Ketentuan dan Kebijakan Privasi berisi teks placeholder yang wajib direview oleh notaris/legal sebelum go-live.
 - Sebelum go-live, ganti data contoh: nomor WhatsApp, telepon, email, dan data legal developer.

@@ -25,7 +25,7 @@ export const units = [
     gambar: [
       { id: "tipe-36-eksterior", alt: "Tampak depan rumah Tipe 36 dengan carport" },
       { id: "tipe-36-ruang-tamu", alt: "Ruang tamu dan ruang keluarga Tipe 36" },
-      { id: "tipe-36-kamar", alt: "Kamar tidur utama Tipe 36" },
+      { id: "tipe-36-kamar", alt: "Kamar tidur utama Tipe 36 dengan jendela dan tirai" },
     ],
   },
 ]

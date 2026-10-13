@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { formatRupiah } from "../../utils/currency"
+import ImageNote from "../common/ImageNote"
 import Photo from "../common/Photo"
 import Reveal from "../common/Reveal"
 import { IconArea, IconBath, IconBed, IconClose } from "../common/icons"
@@ -44,6 +45,7 @@ export default function UnitList({ units, initialSelectedId }) {
           </Reveal>
         ))}
       </div>
+      <ImageNote className="mt-3" />
 
       {selectedUnit ? (
         <div
@@ -82,6 +84,7 @@ export default function UnitList({ units, initialSelectedId }) {
                   />
                 ))}
               </div>
+              <ImageNote className="-mt-3" />
 
               <p className="text-primary font-medium text-lg">
                 Mulai {formatRupiah(selectedUnit.hargaMulai)}

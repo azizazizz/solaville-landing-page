@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { company } from "../../data/company"
 import SectionHeading from "../common/SectionHeading"
+import ImageNote from "../common/ImageNote"
 import Photo from "../common/Photo"
 import Reveal from "../common/Reveal"
 
@@ -48,6 +49,7 @@ export default function Highlights() {
           )
         })}
       </div>
+      <ImageNote className="mt-10" />
     </section>
   )
 }

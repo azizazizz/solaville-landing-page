@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { siteConfig } from "../../data/siteConfig"
 import { company } from "../../data/company"
+import ImageNote from "../common/ImageNote"
 import Photo from "../common/Photo"
 
 export default function Hero() {
@@ -46,12 +47,13 @@ export default function Hero() {
       <div className="order-1 md:order-2 animate-[fade-in_0.8s_ease-out_120ms_backwards]">
         <Photo
           name="hero/beranda"
-          alt={`Rumah di ${company.namaPerumahan} dengan carport dan taman depan`}
+          alt={`Pemandangan udara deretan rumah ${company.namaPerumahan} di antara area hijau`}
           label={`Foto Kawasan ${company.namaPerumahan}`}
           category="eksterior"
           priority
           className="h-72 md:h-112 w-full rounded-3xl"
         />
+        <ImageNote className="mt-2" />
       </div>
     </section>
   )

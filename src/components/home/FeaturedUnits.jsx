@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { getFeaturedUnits } from "../../data/units"
+import ImageNote from "../common/ImageNote"
 import SectionHeading from "../common/SectionHeading"
 import Reveal from "../common/Reveal"
 import UnitCard from "../unit/UnitCard"
@@ -29,6 +30,7 @@ export default function FeaturedUnits() {
           </Reveal>
         ))}
       </div>
+      <ImageNote className="mt-3" />
     </section>
   )
 }

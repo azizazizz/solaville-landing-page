@@ -1,6 +1,6 @@
 import { company } from "../data/company"
 import SectionHeading from "../components/common/SectionHeading"
-import Photo from "../components/common/Photo"
+import logoFull from "../assets/logo/logo-full.png"
 import Reveal from "../components/common/Reveal"
 import HomeCTA from "../components/home/HomeCTA"
 
@@ -16,13 +16,16 @@ export default function TentangPage() {
         />
 
         <div className="mt-10 grid md:grid-cols-2 gap-10 items-start">
-          <Photo
-            name="hero/tentang"
-            alt={`Kawasan ${company.namaPerumahan} dilihat dari ketinggian, deretan rumah di antara area hijau`}
-            label={`Kawasan ${company.namaPerumahan}`}
-            category="lingkungan"
-            className="h-80 w-full rounded-2xl"
-          />
+          {/* Panel gelap tetap (sama dengan footer) agar logo terbaca di mode terang maupun gelap */}
+          <div className="flex h-80 w-full items-center justify-center rounded-2xl bg-night">
+            <img
+              src={logoFull}
+              alt={`Logo ${company.namaPerumahan}`}
+              width="720"
+              height="421"
+              className="h-48 w-auto"
+            />
+          </div>
           <p className="text-fg-soft leading-relaxed">{company.tentang}</p>
         </div>
       </section>

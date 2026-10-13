@@ -31,7 +31,7 @@ export default function GaleriPage() {
           level={1}
           eyebrow="Galeri"
           title="Dokumentasi Kawasan Solaville"
-          description="Gambar berikut masih ilustrasi contoh dan akan diganti dengan dokumentasi asli dari lokasi."
+          description="Gambar berikut adalah visualisasi ilustratif dan akan diganti dengan dokumentasi asli dari lokasi. Kondisi sebenarnya dapat berbeda."
         />
 
         <div className="mt-8 flex flex-wrap gap-3">
