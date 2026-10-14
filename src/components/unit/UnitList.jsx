@@ -77,6 +77,7 @@ export default function UnitList({ units, initialSelectedId }) {
                   <Photo
                     key={gambar.id}
                     name={`unit/${gambar.id}`}
+                    sizes="(min-width: 768px) 227px, 30vw"
                     alt={gambar.alt}
                     label={gambar.alt}
                     category="eksterior"

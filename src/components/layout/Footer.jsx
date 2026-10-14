@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { siteConfig } from "../../data/siteConfig"
 import { contact } from "../../data/contact"
-import logoFull from "../../assets/logo/logo-full.png"
+import logoFull from "../../assets/logo/logo-full.png?w=500&format=webp&quality=85"
 
 // Dihitung sekali saat modul dimuat: tahun tidak berubah selama halaman terbuka
 const YEAR = new Date().getFullYear()

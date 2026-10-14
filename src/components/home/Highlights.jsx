@@ -29,6 +29,7 @@ export default function Highlights() {
             >
               <Photo
                 name={item.gambar}
+                sizes="(min-width: 768px) 552px, 65vw"
                 label={item.judul}
                 category={index % 2 === 0 ? "lingkungan" : "fasilitas"}
                 className="h-56 w-full rounded-2xl"

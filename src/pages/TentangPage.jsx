@@ -1,6 +1,6 @@
 import { company } from "../data/company"
 import SectionHeading from "../components/common/SectionHeading"
-import logoFull from "../assets/logo/logo-full.png"
+import logoFull from "../assets/logo/logo-full.png?format=webp&quality=85"
 import Reveal from "../components/common/Reveal"
 import HomeCTA from "../components/home/HomeCTA"
 

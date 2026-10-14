@@ -5,7 +5,7 @@ import { gallery, galleryCategories } from "../data/gallery"
 import SectionHeading from "../components/common/SectionHeading"
 import PlaceholderImage from "../components/common/PlaceholderImage"
 import GalleryGrid from "../components/galeri/GalleryGrid"
-import { getImageUrl } from "../utils/images"
+import { getImage } from "../utils/images"
 import HomeCTA from "../components/home/HomeCTA"
 
 export default function GaleriPage() {
@@ -18,7 +18,7 @@ export default function GaleriPage() {
       : gallery.filter((item) => item.kategori === activeCategory)
 
   const slides = items.map((item) => ({
-    src: getImageUrl(`galeri/${item.id}`) ?? "",
+    src: getImage(`galeri/${item.id}`)?.largest ?? "",
     alt: item.alt,
     label: item.label,
     kategori: item.kategori,

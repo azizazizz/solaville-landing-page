@@ -26,13 +26,6 @@ export const company = {
       tautan: { teks: "Coba simulasi cicilan", ke: "/simulasi" },
     },
     {
-      judul: "Bonus AC dan TV",
-      gambar: "keunggulan/bonus-ac-tv",
-      deskripsi:
-        "Dapatkan bonus AC dan TV untuk pembelian unit di Solaville. Syarat dan ketentuan berlaku.",
-      tautan: { teks: "Cek unit tersedia", ke: "/unit" },
-    },
-    {
       judul: "Akses ke Jalan Tol",
       gambar: "keunggulan/akses-tol",
       deskripsi:

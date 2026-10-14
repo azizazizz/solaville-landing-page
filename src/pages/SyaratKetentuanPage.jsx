@@ -26,9 +26,7 @@ export default function SyaratKetentuanPage() {
             kebijakan pengembang. Program uang muka (DP) 0% yang dipromosikan di situs ini
             berlaku dengan syarat dan ketentuan tertentu, termasuk persetujuan pembiayaan dari
             bank, kelengkapan dokumen pemohon, dan kebijakan pengembang yang dapat berubah
-            sewaktu-waktu. Bonus AC dan TV juga berlaku dengan syarat dan ketentuan tertentu,
-            termasuk jenis dan spesifikasi bonus serta periode program yang ditetapkan
-            pengembang, dan dapat berubah sewaktu-waktu.
+            sewaktu-waktu.
           </p>
         </div>
 

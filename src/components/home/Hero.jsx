@@ -47,10 +47,11 @@ export default function Hero() {
       <div className="order-1 md:order-2 animate-[fade-in_0.8s_ease-out_120ms_backwards]">
         <Photo
           name="hero/beranda"
-          alt={`Pemandangan udara deretan rumah ${company.namaPerumahan} di antara area hijau`}
+          alt={`Pemandangan udara klaster ${company.namaPerumahan} di antara area hijau`}
           label={`Foto Kawasan ${company.namaPerumahan}`}
           category="eksterior"
           priority
+          sizes="(min-width: 768px) 560px, 65vw"
           className="h-72 md:h-112 w-full rounded-3xl"
         />
         <ImageNote className="mt-2" />

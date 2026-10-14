@@ -2,8 +2,8 @@ import { useState } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 import { siteConfig } from "../../data/siteConfig"
 import { IconClose, IconMenu } from "../common/icons"
-import logoMark from "../../assets/logo/logo-mark.png"
-import logoWordmark from "../../assets/logo/logo-wordmark.png"
+import logoMark from "../../assets/logo/logo-mark.png?format=webp&quality=85"
+import logoWordmark from "../../assets/logo/logo-wordmark.png?w=300&format=webp&quality=85"
 import ThemeToggle from "./ThemeToggle"
 
 const NAV_LINKS = [

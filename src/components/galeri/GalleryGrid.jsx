@@ -13,6 +13,7 @@ export default function GalleryGrid({ items, onSelect }) {
           {/* Zoom 5% hanya pada isi thumbnail: menandai bahwa seluruh kotak bisa diklik untuk dibuka besar */}
           <Photo
             name={`galeri/${item.id}`}
+            sizes="(min-width: 640px) 370px, 36vw"
             alt={item.alt}
             label={item.label}
             category={item.kategori}
