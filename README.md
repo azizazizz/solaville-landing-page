@@ -61,11 +61,11 @@ penuh) disimpan di `private/`, yang tidak ikut ke Git maupun hosting.
 Nama yang belum punya berkas otomatis tampil sebagai placeholder. Teks alternatif foto ada di berkas data yang sama,
 sesuaikan dengan isi foto asli.
 
-**Kompresi otomatis.** Saat `npm run build`, setiap gambar diubah menjadi WebP dalam empat ukuran (480, 800, 1200, 1600
-piksel) oleh `vite-imagetools` (diatur di `vite.config.js` dan `src/utils/images.js`), dan peramban memilih ukuran yang
-sesuai layarnya lewat `srcset`. Karena itu foto sumber tidak perlu dikompres manual: cukup lebar minimal 1600px dan
-format JPG atau PNG. Komponen `Photo` menerima prop `sizes`; isi dengan perkiraan lebar tampil gambar (sedikit di bawah
-lebar sebenarnya di ponsel) agar ponsel tidak mengunduh ukuran yang terlalu besar. Logo diubah ke WebP lewat
+**Kompresi otomatis.** Saat `npm run build`, setiap gambar diubah menjadi WebP dalam lima ukuran (480, 800, 1200, 1600,
+2000 piksel) oleh `vite-imagetools` (diatur di `vite.config.js` dan `src/utils/images.js`), dan peramban memilih ukuran yang
+sesuai layarnya lewat `srcset`. Karena itu foto sumber tidak perlu dikompres manual: cukup lebar minimal 2000px dan
+format JPG atau PNG. Komponen `Photo` menerima prop `sizes`; isi dengan lebar tampil gambar yang sebenarnya (misalnya
+`calc(100vw - 40px)` untuk gambar selebar layar di ponsel). Terlalu kecil membuat gambar buram. Logo diubah ke WebP lewat
 parameter di URL impor, misalnya `logo-full.png?w=500&format=webp&quality=85`.
 
 ## Warna dan Mode Gelap

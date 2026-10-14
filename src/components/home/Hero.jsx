@@ -51,7 +51,7 @@ export default function Hero() {
           label={`Foto Kawasan ${company.namaPerumahan}`}
           category="eksterior"
           priority
-          sizes="(min-width: 768px) 560px, 65vw"
+          sizes="(min-width: 768px) 560px, calc(100vw - 40px)"
           className="h-72 md:h-112 w-full rounded-3xl"
         />
         <ImageNote className="mt-2" />

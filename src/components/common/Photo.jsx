@@ -4,9 +4,8 @@ import PlaceholderImage from "./PlaceholderImage"
 /**
  * Foto dari src/assets/images berdasarkan nama ("galeri/gal-01"), disajikan sebagai WebP responsif.
  * Bila berkasnya belum ada, tampil PlaceholderImage supaya tata letak tetap utuh. Ukuran tampil ditentukan
- * lewat className pemanggil; sizes sengaja sedikit di bawah lebar tampil sebenarnya (misalnya 65vw untuk gambar selebar
- * layar di ponsel) agar layar beresolusi tinggi tidak memilih ukuran terbesar. Gambar sudah berupa render ilustratif,
- * jadi selisih ketajamannya nyaris tidak terlihat.
+ * lewat className pemanggil; sizes harus sama dengan lebar tampil sebenarnya (hitung dari tata letaknya) supaya
+ * peramban memilih varian yang tepat: terlalu kecil membuat gambar buram, terlalu besar membuang kuota.
  * alt kosong berarti gambar dekoratif (isinya sudah disebut teks di dekatnya).
  */
 export default function Photo({

@@ -13,7 +13,7 @@ export default function UnitCard({ unit, onPilih, horizontal = false }) {
     >
       <Photo
         name={`unit/${unit.gambar[0].id}`}
-        sizes="(min-width: 768px) 576px, 65vw"
+        sizes="(min-width: 768px) 576px, calc(100vw - 40px)"
         alt={unit.gambar[0].alt}
         label={unit.nama}
         category="eksterior"

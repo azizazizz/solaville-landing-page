@@ -2,11 +2,11 @@
 // Foto asli cukup ditaruh dengan nama yang sama (jpg, png, webp, atau avif) dan menggantikan gambar yang ada,
 // tanpa mengubah kode. Nama yang belum punya berkas akan jatuh ke komponen placeholder.
 //
-// Setiap gambar diubah saat build menjadi WebP dalam empat ukuran (vite-imagetools), sehingga ponsel hanya
+// Setiap gambar diubah saat build menjadi WebP dalam lima ukuran (vite-imagetools), sehingga ponsel hanya
 // mengunduh ukuran yang dibutuhkan layarnya. Foto sumber boleh besar; yang dikirim ke pengunjung tetap kecil.
 const files = import.meta.glob("../assets/images/**/*.{jpg,jpeg,png,webp,avif}", {
   eager: true,
-  query: { w: "480;800;1200;1600", format: "webp", quality: 72, as: "srcset" },
+  query: { w: "480;800;1200;1600;2000", format: "webp", quality: 82, as: "srcset" },
   import: "default",
 })
 
