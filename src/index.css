@@ -14,8 +14,8 @@
    */
   --color-base: #faf8f2;
   --color-base-alt: #eee9da;
-  --color-primary: #1f5a3b;
-  --color-primary-dark: #134029;
+  --color-primary: #1a432d;
+  --color-primary-dark: #112f20;
   --color-on-primary: #faf8f2;
   --color-fg: #14261b;
   --color-fg-soft: #4b5a4f;
@@ -95,6 +95,11 @@
   :focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
+  }
+
+  /* Hijau utama nyaris tak terlihat di atas panel gelap (kontras 1,3:1), jadi fokus di sana memakai emas */
+  :where(.bg-night) :focus-visible {
+    outline-color: var(--color-gold);
   }
 }
 

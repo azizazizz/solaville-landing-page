@@ -17,7 +17,7 @@ export default function HomeCTA() {
         <div className="flex flex-wrap gap-3">
           <Link
             to="/simulasi"
-            className="rounded-xl bg-primary px-6 py-3 text-on-primary transition-colors hover:bg-primary-dark"
+            className="rounded-xl bg-gold px-6 py-3 text-night transition-colors hover:bg-gold-soft"
           >
             Simulasi Pembelian
           </Link>
