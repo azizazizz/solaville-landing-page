@@ -71,7 +71,7 @@ parameter di URL impor, misalnya `logo-full.png?w=500&format=webp&quality=85`.
 ## Warna dan Mode Gelap
 
 Warna didefinisikan sebagai token di `src/index.css` (blok `@theme`) dan diambil dari logo: hijau hutan
-sebagai warna utama, emas sebagai aksen, krem sebagai netral. Nilai mode gelap ada di blok `.dark`.
+sebagai warna utama, emas sebagai aksen, putih dan krem sebagai netral. Nilai mode gelap ada di blok `.dark`.
 Pakai nama token (`bg-base`, `text-primary`, `text-gold`), bukan kode warna langsung, agar kedua mode tetap konsisten.
 
 ## Alur Pemesanan

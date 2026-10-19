@@ -9,10 +9,10 @@
 
   /*
    * Palet diambil dari logo Solaville: hijau hutan (daun dan huruf SV) sebagai warna utama,
-   * emas (garis dan tulisan SOLA VILLE) sebagai satu-satunya aksen, krem hangat sebagai netral.
+   * emas (garis dan tulisan SOLA VILLE) sebagai satu-satunya aksen, putih dan krem hangat sebagai netral.
    * Token adaptif: nilainya berbeda di light vs dark mode (lihat blok .dark di bawah).
    */
-  --color-base: #faf8f2;
+  --color-base: #ffffff;
   --color-base-alt: #eee9da;
   --color-primary: #1a432d;
   --color-primary-dark: #112f20;
