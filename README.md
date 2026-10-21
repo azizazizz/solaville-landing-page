@@ -16,6 +16,7 @@ npm run lint
 
 ```
 public/                  Berkas dengan URL tetap: favicon, apple-touch-icon, og-image
+vercel.json              Konfigurasi hosting Vercel: fallback SPA dan cache aset (lihat Hosting)
 design/                  Master desain (logo resolusi tinggi). Tidak dipakai langsung oleh situs
 src/
   assets/
@@ -73,6 +74,15 @@ parameter di URL impor, misalnya `logo-full.png?w=500&format=webp&quality=85`.
 Warna didefinisikan sebagai token di `src/index.css` (blok `@theme`) dan diambil dari logo: hijau hutan
 sebagai warna utama, emas sebagai aksen, putih dan krem sebagai netral. Nilai mode gelap ada di blok `.dark`.
 Pakai nama token (`bg-base`, `text-primary`, `text-gold`), bukan kode warna langsung, agar kedua mode tetap konsisten.
+
+## Hosting
+
+Situs ini aplikasi satu halaman (SPA): hanya ada satu berkas HTML, dan halaman seperti `/kontak` dibuat oleh JavaScript.
+Karena itu server wajib mengarahkan setiap alamat yang bukan berkas ke `index.html`; tanpa itu, membuka `/kontak`
+langsung (atau memuat ulang tab lama) menghasilkan 404. Di Vercel aturan itu ada di `vercel.json`. Berkas yang sama juga
+memberi cache setahun untuk `/assets/*` (nama berkasnya sudah memuat hash, jadi aman). Bila pindah ke hosting lain,
+terapkan aturan yang setara: Netlify memakai `public/_redirects` berisi `/* /index.html 200`, Nginx memakai
+`try_files $uri /index.html;`.
 
 ## Alur Pemesanan
 
