@@ -8,7 +8,7 @@ export default function MapEmbed() {
         src={contact.mapsEmbedUrl}
         className="w-full h-full"
         loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
+        referrerPolicy="strict-origin-when-cross-origin"
       />
     </div>
   )
