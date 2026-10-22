@@ -1,3 +1,5 @@
+import { siteConfig } from "../data/siteConfig"
+
 export const EMPTY_BUYER = {
   namaLengkap: "",
   nikKtp: "",
@@ -11,5 +13,5 @@ export const EMPTY_BUYER = {
 export const EMPTY_UNIT_IDENTITY = {
   blok: "",
   noUnit: "",
-  bookingFee: 0,
+  bookingFee: siteConfig.bookingFee,
 }

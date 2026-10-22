@@ -26,7 +26,8 @@ export default function SyaratKetentuanPage() {
             kebijakan pengembang. Program uang muka (DP) 0% yang dipromosikan di situs ini
             berlaku dengan syarat dan ketentuan tertentu, termasuk persetujuan pembiayaan dari
             bank, kelengkapan dokumen pemohon, dan kebijakan pengembang yang dapat berubah
-            sewaktu-waktu.
+            sewaktu-waktu. Gratis kanopi serta biaya notaris, AJB, BPHTB, balik nama, dan SHM juga
+            berlaku dengan syarat dan ketentuan tertentu yang ditetapkan pengembang.
           </p>
         </div>
 

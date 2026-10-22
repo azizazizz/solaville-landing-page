@@ -39,9 +39,9 @@ src/
 
 Konten ada di `src/data/*.js` dan bisa diganti tanpa menyentuh komponen:
 
-- `siteConfig.js`: nama brand, tagline, nomor WhatsApp (nilai sekarang masih contoh)
+- `siteConfig.js`: nama brand, tagline, nomor WhatsApp (nilai sekarang masih contoh), dan nilai awal booking fee di form SPR
 - `company.js`: profil, keunggulan, nama developer
-- `units.js`: tipe unit dan harga
+- `units.js`: tipe unit, harga, spesifikasi, dan denah (gambar denah ada di `src/assets/images/unit/`, bisa diperbesar di detail unit)
 - `contact.js`: alamat, telepon, email, peta
 - `gallery.js`: daftar foto galeri
 

@@ -1,4 +1,5 @@
 import { useRef, useState } from "react"
+import { siteConfig } from "../../data/siteConfig"
 import { units } from "../../data/units"
 import { formatRupiah, formatThousands, parseRupiahInput } from "../../utils/currency"
 import { buildSprNumber, generateSprPdf } from "../../utils/sprDocument"
@@ -308,7 +309,11 @@ export default function SprForm({
               <span id="spr-bookingFee-error" className="text-xs text-danger">
                 {errors.bookingFee}
               </span>
-            ) : null}
+            ) : (
+              <span className="text-xs text-fg-soft">
+                Cukup booking {formatRupiah(siteConfig.bookingFee)}. Nilainya bisa Anda ubah.
+              </span>
+            )}
           </label>
         </div>
 

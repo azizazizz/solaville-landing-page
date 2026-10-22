@@ -2,24 +2,26 @@ export const units = [
   {
     id: "tipe-36",
     nama: "Tipe 36",
-    hargaMulai: 395000000,
+    hargaMulai: 400000000,
     luasTanah: 72,
     luasBangunan: 36,
     kamarTidur: 2,
     kamarMandi: 1,
     carport: 1,
-    lantai: 1,
+    lantai: "Rumah mezzanine",
     featured: true,
-    stokTersedia: 6,
     deskripsi:
-      "Hunian satu lantai dengan dua kamar tidur, cocok untuk pasangan muda atau keluarga kecil yang baru membangun rumah tangga. Ruang tamu dan ruang keluarga menyatu dalam konsep terbuka sehingga rumah terasa lebih luas.",
+      "Rumah Mezzanine Premium tipe 36/72 yang eksklusif, modern, dan terjangkau. Dua kamar tidur dan satu kamar mandi, dengan mezanin yang terhubung tangga, serta carport di halaman depan.",
+    // Sesuai brosur pemasaran; luas bangunan sudah tampil terpisah
     spesifikasi: [
-      "Pondasi batu kali, struktur beton bertulang",
-      "Dinding bata merah plester aci, cat eksterior Dulux Weathershield",
-      "Atap genteng beton dengan rangka baja ringan",
-      "Lantai keramik 40x40 cm pada seluruh ruangan",
-      "Kusen pintu dan jendela aluminium",
-      "Instalasi listrik 2200 watt, air PDAM dan sumur bor",
+      "Struktur dan pondasi: batu kali dan beton bertulang",
+      "Dinding: bata ringan double, plester aci halus, dan finishing cat",
+      "Atap dan plafon: rangka baja ringan anti-rayap, genteng beton, dan plafon gypsum rapi",
+      "Lantai utama: granite polos 60 x 60 cm",
+      "Kusen dan pintu: kusen aluminium tahan cuaca dengan pintu utama High Pressure Laminate",
+      "Kamar mandi: full keramik lantai hingga dinding, dilengkapi kloset duduk dan shower",
+      "Instalasi air bersih: jaringan air bersih siap pakai",
+      "Kapasitas listrik: 1.300 VA",
     ],
     // id = nama berkas di src/assets/images/unit (tanpa ekstensi)
     gambar: [
@@ -27,6 +29,12 @@ export const units = [
       { id: "tipe-36-ruang-tamu", alt: "Ruang tamu Tipe 36 dengan sofa dan tangga" },
       { id: "tipe-36-kamar", alt: "Kamar tidur utama Tipe 36 dengan jendela dan lemari" },
     ],
+    // Denah dari brosur pemasaran; rasio = lebar / tinggi gambar, untuk menahan ruangnya sebelum gambar termuat
+    denah: {
+      id: "tipe-36-denah",
+      alt: "Denah Tipe 36/72: ruang keluarga dengan tangga ke mezanin, dua kamar tidur, satu kamar mandi, taman, dan carport",
+      rasio: "1821 / 2799",
+    },
   },
 ]
 

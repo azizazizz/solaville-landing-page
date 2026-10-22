@@ -21,9 +21,9 @@ export default function Hero() {
           className="animate-rise-in text-fg-soft max-w-md"
           style={{ animationDelay: "160ms" }}
         >
-          {company.namaPerumahan} menghadirkan hunian dengan struktur kokoh dan lingkungan
-          yang tetap asri, dibangun bertahap sejak {company.tahunBerdiri} di{" "}
-          {company.lokasiSingkat}.
+          {company.namaPerumahan} menghadirkan Rumah Mezzanine Premium yang eksklusif, modern, dan
+          terjangkau di {company.lokasiSingkat}, dibangun pada tahun {company.tahunPembangunan}.
+          DP 0%, cukup booking Rp3 juta.
         </p>
         <div
           className="animate-rise-in flex flex-wrap gap-3 pt-2"

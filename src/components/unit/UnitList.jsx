@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Lightbox from "yet-another-react-lightbox"
+import Zoom from "yet-another-react-lightbox/plugins/zoom"
+import "yet-another-react-lightbox/styles.css"
 import { formatRupiah } from "../../utils/currency"
+import { getImage } from "../../utils/images"
 import ImageNote from "../common/ImageNote"
 import Photo from "../common/Photo"
 import Reveal from "../common/Reveal"
@@ -10,19 +14,23 @@ import UnitCard from "./UnitCard"
 export default function UnitList({ units, initialSelectedId }) {
   const navigate = useNavigate()
   const [selectedId, setSelectedId] = useState(initialSelectedId || null)
+  const [denahOpen, setDenahOpen] = useState(false)
 
   const selectedUnit = units.find((unit) => unit.id === selectedId)
+  const denah = selectedUnit?.denah
+  const denahImage = denah ? getImage(`unit/${denah.id}`) : undefined
 
   useEffect(() => {
     if (!selectedUnit) return
 
     function handleKeyDown(event) {
-      if (event.key === "Escape") setSelectedId(null)
+      // Escape saat denah diperbesar hanya menutup denah, bukan seluruh detail unit
+      if (event.key === "Escape" && !denahOpen) setSelectedId(null)
     }
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [selectedUnit])
+  }, [selectedUnit, denahOpen])
 
   function handleSimulasikan(unit) {
     navigate("/simulasi", { state: { unitId: unit.id } })
@@ -103,21 +111,52 @@ export default function UnitList({ units, initialSelectedId }) {
                   {selectedUnit.luasBangunan} m²
                 </span>
                 <span>{selectedUnit.carport} Carport</span>
-                <span>{selectedUnit.lantai} Lantai</span>
+                <span>{selectedUnit.lantai}</span>
               </div>
 
               <p className="text-fg-soft">{selectedUnit.deskripsi}</p>
 
-              <div>
-                <h4 className="text-fg font-medium mb-2">Spesifikasi Bangunan</h4>
-                <ul className="flex flex-col gap-1 text-fg-soft">
-                  {selectedUnit.spesifikasi.map((item) => (
-                    <li key={item} className="flex gap-2">
-                      <span>-</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+              {/* Denah di kiri dan spesifikasi di kanan pada layar lebar; menumpuk di ponsel */}
+              <div
+                className={`grid gap-6 md:items-start ${
+                  denah && denahImage ? "md:grid-cols-[minmax(0,20rem)_1fr]" : ""
+                }`}
+              >
+                {denah && denahImage ? (
+                  <div>
+                    <h4 className="text-fg font-medium mb-3">Denah Rumah</h4>
+                    <button
+                      type="button"
+                      onClick={() => setDenahOpen(true)}
+                      aria-label="Perbesar denah rumah"
+                      className="block w-full max-w-xs md:max-w-none overflow-hidden rounded-xl bg-base-alt transition-opacity hover:opacity-90"
+                      style={{ aspectRatio: denah.rasio }}
+                    >
+                      <Photo
+                        name={`unit/${denah.id}`}
+                        alt={denah.alt}
+                        sizes="(min-width: 768px) 320px, 80vw"
+                        className="h-full w-full object-contain"
+                      />
+                    </button>
+                    <ImageNote className="mt-2">
+                      Ketuk denah untuk memperbesar. Denah adalah ilustrasi desain, detail aktual dapat
+                      menyesuaikan kondisi bangunan asli.
+                    </ImageNote>
+                  </div>
+                ) : null}
+
+                <div>
+                  <h4 className="text-fg font-medium mb-2">Spesifikasi Bangunan</h4>
+                  <ul className="flex flex-col gap-1 text-fg-soft">
+                    {selectedUnit.spesifikasi.map((item) => (
+                      <li key={item} className="flex gap-2">
+                        <span>-</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
               <div className="flex flex-wrap gap-3">
@@ -139,6 +178,19 @@ export default function UnitList({ units, initialSelectedId }) {
             </div>
           </div>
         </div>
+      ) : null}
+
+      {/* Di luar overlay detail unit agar klik di dalam pembesaran denah tidak ikut menutup detail unit */}
+      {denah && denahImage ? (
+        <Lightbox
+          open={denahOpen}
+          close={() => setDenahOpen(false)}
+          slides={[{ src: denahImage.largest, alt: denah.alt }]}
+          plugins={[Zoom]}
+          carousel={{ finite: true }}
+          // Tanpa tutup lewat latar: ketukan yang sama bisa "tembus" ke lapisan detail unit di bawahnya dan menutupnya juga
+          render={{ buttonPrev: () => null, buttonNext: () => null }}
+        />
       ) : null}
     </>
   )

@@ -1,35 +1,42 @@
 export const company = {
   namaDeveloper: "PT Griya Solaville Sejahtera",
   namaPerumahan: "Solaville",
-  tahunBerdiri: 2018,
+  tahunPembangunan: 2026,
   lokasiSingkat: "Kecamatan Serang Baru, Kabupaten Bekasi, Jawa Barat",
 
   tentang:
-    "Solaville dibangun di atas lahan seluas 8,2 hektare yang dahulu merupakan area perkebunan warga. Alih-alih meratakan seluruh kontur tanah, pengembang memilih mempertahankan pepohonan besar yang sudah ada selama puluhan tahun dan menata ulang jalur hijau di antara klaster rumah. Pembangunan dilakukan secara bertahap sejak 2018, dimulai dari klaster pertama dengan 48 unit, dan saat ini sudah memasuki tahap pembangunan klaster keempat.",
+    "Solaville adalah perumahan Rumah Mezzanine Premium yang eksklusif, modern, dan terjangkau, dibangun pada tahun 2026 di Kp. Sampora, Jayasampurna, Kecamatan Serang Baru, Kabupaten Bekasi. Kawasannya hijau dan asri, dengan lingkungan yang nyaman untuk keluarga. Lokasinya strategis, dekat dengan pintu tol, kawasan industri, pasar tradisional, sekolah, dan rumah sakit.",
 
-  visi:
-    "Menjadi kawasan hunian yang nyaman ditinggali lintas generasi, dengan lingkungan yang tetap hijau dan akses yang mudah ke fasilitas umum di sekitarnya.",
+  visi: "Harmoni sempurna untuk keluarga: hunian yang eksklusif, modern, dan terjangkau di kawasan yang hijau dan asri.",
 
   misi: [
-    "Membangun rumah dengan struktur yang kuat dan material yang teruji, bukan sekadar tampilan fasad yang menarik.",
-    "Menjaga ruang terbuka hijau minimal 20 persen dari total luas lahan di setiap tahap pembangunan.",
-    "Menyediakan fasilitas dasar seperti keamanan 24 jam, jalan lingkungan yang layak, dan saluran drainase yang memadai sejak klaster pertama dihuni.",
-    "Mendengarkan keluhan dan masukan penghuni melalui pertemuan rutin warga setiap tiga bulan.",
+    "Menghadirkan Rumah Mezzanine Premium tipe 36/72 dengan spesifikasi bangunan yang jelas dan harga yang terjangkau.",
+    "Menjaga kawasan tetap hijau dan asri, dengan lingkungan yang nyaman untuk keluarga.",
+    "Menyediakan keamanan melalui pos security, CCTV, dan sistem satu pintu (one gate system).",
+    "Memudahkan kepemilikan rumah melalui DP 0% dan cukup booking Rp3 juta.",
   ],
 
+  // gambar = nama berkas di src/assets/images/keunggulan (tanpa ekstensi)
   keunggulan: [
     {
       judul: "Punya Rumah dengan DP 0%",
       gambar: "keunggulan/dp-0",
       deskripsi:
-        "Anda bisa memiliki rumah di Solaville tanpa menyiapkan uang muka di awal. Besaran cicilannya bisa dihitung langsung dari harga unit. Syarat dan ketentuan berlaku.",
+        "DP 0% dan cukup booking Rp3 juta. Langsung pilih unit impian Anda, lalu hitung besaran cicilannya dari harga unit. Syarat dan ketentuan berlaku.",
       tautan: { teks: "Coba simulasi cicilan", ke: "/simulasi" },
     },
     {
-      judul: "Akses ke Jalan Tol",
+      judul: "Gratis Kanopi dan Biaya Pengurusan",
+      gambar: "keunggulan/gratis-biaya",
+      deskripsi:
+        "Gratis kanopi, biaya notaris, biaya AJB dan BPHTB, serta balik nama dan SHM. Syarat dan ketentuan berlaku.",
+      tautan: { teks: "Cek unit tersedia", ke: "/unit" },
+    },
+    {
+      judul: "Akses ke Pintu Tol Sukaragam",
       gambar: "keunggulan/akses-tol",
       deskripsi:
-        "Jarak tempuh sekitar 10 menit berkendara ke Gerbang Tol Sukaragam (Tol Jakarta-Cikampek 2 Selatan), memudahkan mobilitas harian menuju Jakarta maupun kawasan industri Bekasi.",
+        "Hanya 10 menit ke pintu Tol Sukaragam (Japek 2), dengan lokasi strategis dan view tol yang eksklusif.",
     },
     {
       judul: "Dekat dengan Kawasan Industri",
@@ -38,34 +45,26 @@ export const company = {
         "Lokasinya berdekatan dengan kawasan industri MM2100 dan Jababeka, sehingga praktis bagi karyawan dan pekerja kawasan industri yang ingin tinggal dekat dari tempat kerja.",
     },
     {
-      judul: "Dekat dengan Sekolah",
+      judul: "Dekat Pasar, Sekolah, dan Rumah Sakit",
       gambar: "keunggulan/sekolah",
       deskripsi:
-        "Tiga sekolah dasar dan satu sekolah menengah berada dalam radius 2 kilometer dari gerbang utama perumahan.",
+        "Pasar tradisional, sekolah, dan rumah sakit berada dekat dari perumahan, memudahkan kebutuhan harian keluarga.",
     },
     {
-      judul: "Kontur Tanah Lebih Tinggi",
-      gambar: "keunggulan/kontur",
-      deskripsi:
-        "Lahan berada di area dengan kontur yang lebih tinggi dibanding kawasan sekitarnya, sehingga risiko banjir relatif lebih rendah.",
+      judul: "Kawasan Hijau dan Asri",
+      gambar: "keunggulan/rth",
+      deskripsi: "Lingkungan yang nyaman untuk keluarga, di kawasan yang hijau dan asri.",
     },
     {
       judul: "Keamanan Satu Pintu",
       gambar: "keunggulan/keamanan",
       deskripsi:
-        "Akses keluar masuk perumahan terpusat melalui satu gerbang utama dengan penjagaan selama 24 jam dan sistem CCTV di titik-titik strategis.",
-    },
-    {
-      judul: "Ruang Terbuka Hijau",
-      gambar: "keunggulan/rth",
-      deskripsi:
-        "Taman lingkungan dan jalur pejalan kaki yang dirancang dengan pohon peneduh, dipertahankan dari kondisi lahan sebelum dibangun.",
+        "Pos security, CCTV keamanan, dan one gate system untuk akses keluar masuk perumahan.",
     },
   ],
 
   legalitas: [
-    "Sertifikat Hak Milik (SHM) per unit, diproses setelah pelunasan atau sesuai jadwal akad kredit",
-    "Izin Mendirikan Bangunan (IMB/PBG) kolektif sudah diterbitkan untuk klaster 1 hingga 3",
-    "Bekerja sama dengan bank nasional untuk fasilitas KPR",
+    "Sertifikat Hak Milik (SHM), dengan biaya balik nama dan SHM gratis",
+    "Biaya notaris, AJB, dan BPHTB gratis",
   ],
 }

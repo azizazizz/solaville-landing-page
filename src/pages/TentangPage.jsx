@@ -12,7 +12,7 @@ export default function TentangPage() {
           level={1}
           eyebrow="Tentang Kami"
           title={`Mengenal ${company.namaPerumahan}`}
-          description={`Dikembangkan oleh ${company.namaDeveloper} sejak tahun ${company.tahunBerdiri}.`}
+          description={`Dibangun pada tahun ${company.tahunPembangunan} oleh ${company.namaDeveloper}.`}
         />
 
         <div className="mt-10 grid md:grid-cols-2 gap-10 items-start">
