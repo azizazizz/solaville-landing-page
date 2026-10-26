@@ -31,7 +31,21 @@ const imageByName = new Map(
   ]),
 )
 
+// Slot yang sementara memakai gambar yang sama dengan galeri. Satu gambar hanya boleh ada sebagai satu berkas:
+// berkas kembar membuat nama hasil build bentrok di mesin build tertentu (Vercel) dan merusak prerender.
+// Begitu foto asli ditaruh dengan nama slotnya (mis. unit/tipe-36-eksterior.jpg), foto itu otomatis dipakai.
+const CADANGAN = {
+  "hero/beranda": "galeri/gal-10",
+  "unit/tipe-36-eksterior": "galeri/gal-01",
+  "unit/tipe-36-ruang-tamu": "galeri/gal-03",
+  "unit/tipe-36-kamar": "galeri/gal-04",
+  "keunggulan/akses-tol": "galeri/gal-11",
+  "keunggulan/sekolah": "galeri/gal-12",
+  "keunggulan/rth": "galeri/gal-08",
+  "keunggulan/keamanan": "galeri/gal-07",
+}
+
 // Mengembalikan { src, srcSet, largest } atau undefined bila berkasnya belum ada
 export function getImage(name) {
-  return imageByName.get(name)
+  return imageByName.get(name) ?? imageByName.get(CADANGAN[name])
 }

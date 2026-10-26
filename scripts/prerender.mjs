@@ -4,6 +4,7 @@
 //   vite build --ssr src/entry-server.jsx --outDir dist-ssr  -> dist-ssr/entry-server.js
 // Sumber data SEO: src/data/seo.js (juga dipakai klien lewat src/hooks/useRouteSeo.js).
 // Build GAGAL bila ada yang janggal (judul kepanjangan, H1 ganda, JSON-LD rusak, aset hilang, data contoh bocor).
+import { createHash } from "node:crypto"
 import fs from "node:fs"
 import path from "node:path"
 import { pathToFileURL } from "node:url"
@@ -125,6 +126,23 @@ tulisStatis("llms.txt", seo.buildLlmsTxt())
 tulisStatis("llms-full.txt", seo.buildLlmsFullTxt())
 
 // ---------- validasi ----------
+// Berkas gambar kembar menghasilkan nama aset yang bergantung urutan build (bentrok di Vercel). Satu gambar, satu berkas.
+{
+  const sidik = new Map()
+  const telusuri = (dir) => {
+    for (const entri of fs.readdirSync(dir, { withFileTypes: true })) {
+      const jalur = path.join(dir, entri.name)
+      if (entri.isDirectory()) telusuri(jalur)
+      else if (/\.(jpe?g|png|webp|avif)$/i.test(entri.name)) {
+        const kunci = createHash("sha1").update(fs.readFileSync(jalur)).digest("hex")
+        sidik.set(kunci, [...(sidik.get(kunci) ?? []), path.relative(root, jalur).replaceAll("\\", "/")])
+      }
+    }
+  }
+  telusuri(path.join(root, "src/assets"))
+  for (const berkas of sidik.values())
+    gagalBila(berkas.length > 1, `Gambar kembar (isi sama): ${berkas.join(", ")}. Simpan satu saja dan pakai CADANGAN di src/utils/images.js`)
+}
 const dataContoh = [siteConfig.waNumber, contact.telepon, contact.email]
 const asetAda = new Set(fs.readdirSync(path.join(dist, "assets")))
 

@@ -63,7 +63,9 @@ penuh) disimpan di `private/`, yang tidak ikut ke Git maupun hosting.
 | `unit/`       | Kartu dan detail unit                   | sesuai field `gambar[].id` di `data/units.js`            |
 | `galeri/`     | Halaman Galeri dan lightbox             | `gal-01`, `gal-02`, dan seterusnya sesuai `id` di `data/gallery.js` |
 
-Nama yang belum punya berkas otomatis tampil sebagai placeholder. Teks alternatif foto ada di berkas data yang sama,
+Slot `hero/beranda`, `unit/*`, dan beberapa `keunggulan/*` sementara memakai gambar galeri lewat `CADANGAN` di `src/utils/images.js`
+(satu gambar hanya boleh ada sebagai satu berkas; build gagal bila ada berkas kembar). Foto asli dengan nama slot langsung menggantikannya.
+Nama yang belum punya berkas sama sekali otomatis tampil sebagai placeholder. Teks alternatif foto ada di berkas data yang sama,
 sesuaikan dengan isi foto asli.
 
 **Kompresi otomatis.** Saat `npm run build`, setiap gambar diubah menjadi WebP dalam lima ukuran (480, 800, 1200, 1600,
