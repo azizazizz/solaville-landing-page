@@ -6,17 +6,19 @@ Landing page developer perumahan, dibangun dengan React 19, Vite, Tailwind CSS v
 
 ```bash
 npm install
-cp .env.example .env   # lalu isi VITE_SITE_URL setelah domain tersedia
-npm run dev            # pengembangan
-npm run build          # hasil produksi di dist/
+npm run dev            # pengembangan (tanpa prerender)
+npm run build          # produksi: build klien + build server + prerender, hasil di dist/
+npm run build:klien    # hanya build klien (tanpa prerender)
 npm run lint
+npm run preview        # melihat dist/ (tidak meniru aturan cleanUrls Vercel)
 ```
 
 ## Struktur Folder
 
 ```
-public/                  Berkas dengan URL tetap: favicon, apple-touch-icon, og-image
-vercel.json              Konfigurasi hosting Vercel: fallback SPA dan cache aset (lihat Hosting)
+public/                  Berkas dengan URL tetap: favicon, apple-touch-icon, og-solaville.jpg (gambar pratinjau sosial)
+scripts/                 prerender.mjs (HTML tiap rute saat build), og-image.html (templat gambar pratinjau)
+vercel.json              Konfigurasi hosting Vercel (lihat Hosting)
 design/                  Master desain (logo resolusi tinggi). Tidak dipakai langsung oleh situs
 src/
   assets/
@@ -26,7 +28,7 @@ src/
     common/              Dipakai banyak halaman: Reveal, SectionHeading, icons, placeholder gambar
     layout/              Navbar, Footer, ThemeToggle, FloatingWhatsapp, ScrollToTop
     home/ unit/ galeri/ kontak/ simulasi/   Komponen khusus per fitur
-  data/                  Seluruh konten (unit, perusahaan, galeri, kontak, nomor WhatsApp)
+  data/                  Seluruh konten (unit, perusahaan, galeri, kontak, nomor WhatsApp) + seo.js dan faq.js
   hooks/                 Hook yang dipakai ulang
   layouts/               Kerangka halaman (MainLayout)
   pages/                 Satu berkas per rute
@@ -44,6 +46,8 @@ Konten ada di `src/data/*.js` dan bisa diganti tanpa menyentuh komponen:
 - `units.js`: tipe unit, harga, spesifikasi, dan denah (gambar denah ada di `src/assets/images/unit/`, bisa diperbesar di detail unit)
 - `contact.js`: alamat, telepon, email, peta
 - `gallery.js`: daftar foto galeri
+- `faq.js`: tanya jawab di Beranda, otomatis ikut ke data terstruktur dan llms.txt (hanya fakta dari brosur)
+- `seo.js`: judul, deskripsi, dan data terstruktur tiap halaman (lihat SEO dan GEO)
 
 ## Mengganti Foto
 
@@ -75,14 +79,46 @@ Warna didefinisikan sebagai token di `src/index.css` (blok `@theme`) dan diambil
 sebagai warna utama, emas sebagai aksen, putih dan krem sebagai netral. Nilai mode gelap ada di blok `.dark`.
 Pakai nama token (`bg-base`, `text-primary`, `text-gold`), bukan kode warna langsung, agar kedua mode tetap konsisten.
 
+## SEO dan GEO
+
+Situs ini SPA, tetapi `npm run build` menghasilkan **satu berkas HTML lengkap per halaman** (prerender), sehingga
+mesin pencari dan crawler AI, yang umumnya tidak menjalankan JavaScript, langsung membaca isi halaman. Di browser
+HTML itu di-hydrate seperti biasa.
+
+- **Sumber tunggal: `src/data/seo.js`.** Berisi judul, deskripsi, canonical, robots, data terstruktur (JSON-LD), sitemap,
+  robots.txt, dan llms.txt. Dipakai klien (`src/hooks/useRouteSeo.js`, saat berpindah halaman) dan build
+  (`scripts/prerender.mjs`), jadi teksnya tidak bisa berbeda.
+- **Menambah halaman baru:** tambahkan `<Route>` di `src/AppRoutes.jsx` **dan** entri di `routes` pada `seo.js`.
+  Build gagal bila salah satunya terlupa. Judul maksimal 60 karakter, deskripsi maksimal 155.
+- **Mode rute:** `full` (isi diprerender; untuk halaman konten) atau `shell` (hanya `<head>`; untuk halaman yang membaca
+  sessionStorage seperti `/simulasi`, `/spr`, `/selesai`). Rute `noindex` tidak masuk sitemap.
+- **Build akan gagal** bila ada judul atau deskripsi kepanjangan, H1 ganda, JSON-LD rusak, aset yang dirujuk HTML tidak ada,
+  atau data contoh (WhatsApp, telepon, email) bocor ke data terstruktur dan llms.txt.
+- **Data contoh tidak dipublikasikan ke mesin pencari.** Telepon dan email masuk ke JSON-LD dan llms.txt hanya bila
+  `contact.diverifikasi.telepon` / `.email` bernilai `true`, 
+  Ubah setelah data asli dipasang.
+- **Harga tidak tampil di halaman pemasaran** dan tidak masuk data terstruktur. Di Simulasi harga diisi sendiri oleh
+  pengunjung (tanpa harga bawaan); tenor yang tersedia 15, 20, dan 25 tahun (`TENOR_OPTIONS` di `utils/loan.js`).
+- **Kebijakan crawler AI** ada di `seo.js` (`BOT_PENCARIAN_AI` diizinkan, `BOT_PELATIHAN_AI` diblokir) dan menjadi `robots.txt`.
+  robots.txt hanya imbauan, bukan penghalang teknis.
+- **Gambar pratinjau sosial:** `public/og-solaville.jpg`, dibuat dari `scripts/og-image.html` (petunjuk di dalam berkasnya).
+  Ganti nama berkasnya (dan `OG_IMAGE.path` di `seo.js`) bila gambar diubah agar cache media sosial tidak memakai versi lama.
+- Domain utama adalah konstanta `SITE_URL` di `seo.js`.
+
 ## Hosting
 
-Situs ini aplikasi satu halaman (SPA): hanya ada satu berkas HTML, dan halaman seperti `/kontak` dibuat oleh JavaScript.
-Karena itu server wajib mengarahkan setiap alamat yang bukan berkas ke `index.html`; tanpa itu, membuka `/kontak`
-langsung (atau memuat ulang tab lama) menghasilkan 404. Di Vercel aturan itu ada di `vercel.json`. Berkas yang sama juga
-memberi cache setahun untuk `/assets/*` (nama berkasnya sudah memuat hash, jadi aman). Bila pindah ke hosting lain,
-terapkan aturan yang setara: Netlify memakai `public/_redirects` berisi `/* /index.html 200`, Nginx memakai
-`try_files $uri /index.html;`.
+Situs berjalan di Vercel. `vercel.json`:
+
+- `cleanUrls: true` dan `trailingSlash: false`: `/kontak` melayani `kontak.html` hasil prerender; `/kontak/` dan `/kontak.html`
+  dialihkan ke `/kontak`.
+- Catch-all rewrite ke `/index.html` tetap ada sebagai pengaman untuk alamat tak dikenal (klien lalu menampilkan halaman
+  Tidak Ditemukan dengan `noindex`). Tanpa aturan semacam ini, membuka atau memuat ulang halaman selain beranda menghasilkan 404.
+- Cache setahun untuk `/assets/*` (nama berkas sudah memuat hash isi), `Content-Type` untuk `llms.txt`, dan
+  `X-Robots-Tag: noindex` untuk host `*.vercel.app` agar domain preview tidak ikut terindeks.
+
+Pengalihan `www` ke domain utama diatur di pengaturan domain Vercel. Bila pindah ke hosting lain, terapkan aturan yang setara
+(Netlify: `public/_redirects` berisi `/* /index.html 200`; Nginx: `try_files $uri $uri.html /index.html;`).
+Perilaku `cleanUrls` hanya bisa diuji sebenarnya di Preview Deployment Vercel (push ke branch), jadi uji di sana sebelum merge.
 
 ## Alur Pemesanan
 
@@ -94,4 +130,6 @@ Hasil simulasi disimpan di sessionStorage. Data pribadi pemesan hanya ada di mem
 - Gambar sekarang visualisasi AI. Setelah semuanya diganti dokumentasi asli, hapus keterangan "visualisasi ilustratif": komponen `ImageNote` (dipakai di Beranda dan Unit) dan kalimat di `GaleriPage.jsx`.
 - Tulisan pada papan gerbang tol dan sekolah di gambar sudah dikosongkan agar tidak bertentangan dengan teks di `data/company.js`. Foto asli yang memuat papan nama harus sesuai dengan teks tersebut.
 - Halaman Syarat & Ketentuan dan Kebijakan Privasi berisi teks placeholder yang wajib direview oleh notaris/legal sebelum go-live.
-- Sebelum go-live, ganti data contoh: nomor WhatsApp, telepon, email, dan data legal developer.
+- Sebelum go-live, ganti data contoh: nomor WhatsApp, telepon, email, dan lalu aktifkan flag `contact.diverifikasi` agar masuk ke data terstruktur.
+- Halaman Syarat & Ketentuan dan Kebijakan Privasi bertanda `noindex` dan di luar sitemap sampai ditinjau notaris;
+  setelah itu ubah di `seo.js` (hapus `noindex`, tambah `sitemap: true`).

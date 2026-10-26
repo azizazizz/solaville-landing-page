@@ -14,8 +14,8 @@ export default function UnitPage() {
         <SectionHeading
           level={1}
           eyebrow="Tipe Unit"
-          title="Tipe Rumah di Solaville"
-          description="Buka detail unit untuk melihat spesifikasi, foto, dan harga mulai."
+          title="Rumah Mezzanine Tipe 36/72 di Solaville"
+          description="Buka detail unit untuk melihat spesifikasi, denah, dan foto."
         />
 
         <div className="mt-10">

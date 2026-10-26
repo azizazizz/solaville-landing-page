@@ -67,11 +67,10 @@ export function generateSprPdf({
   doc.text(`No: ${sprNumber}`, 105, 25, { align: "center" })
 
   doc.setFontSize(10.5)
-  doc.text(`${company.namaDeveloper}`, 14, 35)
-  doc.text(`Perumahan ${company.namaPerumahan}`, 14, 41)
-  doc.text(`Tanggal: ${today}`, 14, 47)
+  doc.text(`Perumahan ${company.namaPerumahan}`, 14, 35)
+  doc.text(`Tanggal: ${today}`, 14, 41)
 
-  let y = sectionTable(doc, 53, "Data Diri Pemesan", [
+  let y = sectionTable(doc, 47, "Data Diri Pemesan", [
     ["Nama Lengkap", buyer.namaLengkap || "-"],
     ["NIK KTP", buyer.nikKtp || "-"],
     ["NPWP", buyer.npwp || "-"],
@@ -128,7 +127,7 @@ export function generateSprPdf({
   doc.text(doc.splitTextToSize(buyer.namaLengkap || "Nama Pemesan", 70), 45, signY + 25, {
     align: "center",
   })
-  doc.text(doc.splitTextToSize(company.namaDeveloper, 70), 150, signY + 25, { align: "center" })
+  doc.text(doc.splitTextToSize(`Perumahan ${company.namaPerumahan}`, 70), 150, signY + 25, { align: "center" })
 
   doc.save(`${sprNumber.replaceAll("/", "-")}.pdf`)
 }

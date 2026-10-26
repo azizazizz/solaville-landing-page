@@ -18,8 +18,12 @@ export default function FeaturedUnits() {
       <Reveal>
         <SectionHeading
           eyebrow="Tipe Unit"
-          title={units.length === 1 ? "Tipe rumah yang tersedia" : "Pilihan tipe rumah"}
-          description="Harga berikut adalah harga mulai, dapat berubah sesuai lokasi kavling dan masa pembangunan."
+          title={
+            units.length === 1
+              ? `${units[0].kamarTidur} kamar tidur, mezzanine, di atas tanah ${units[0].luasTanah} m²`
+              : "Pilihan tipe rumah"
+          }
+          description="Rumah Mezzanine Premium dengan carport. Buka detail untuk melihat spesifikasi dan denah."
         />
       </Reveal>
 

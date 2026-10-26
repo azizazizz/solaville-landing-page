@@ -11,8 +11,8 @@ export default function Highlights() {
       <Reveal>
         <SectionHeading
           eyebrow="Mengapa Solaville"
-          title="Pertimbangan yang lebih dari sekadar desain rumah"
-          description="Berikut beberapa hal yang membedakan Solaville dengan kawasan hunian lain di sekitarnya."
+          title="Lokasi yang dekat ke tol, kerja, dan kebutuhan harian"
+          description="Tol, kawasan industri, pasar, sekolah, dan rumah sakit, semuanya dekat dari rumah."
         />
       </Reveal>
 

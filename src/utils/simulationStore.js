@@ -1,4 +1,5 @@
 import { getUnitById } from "../data/units"
+import { TENOR_OPTIONS } from "./loan"
 
 const STORAGE_KEY = "solaville-simulasi"
 
@@ -10,7 +11,7 @@ const isValid = (v) =>
   (v.unitId === "" || Boolean(getUnitById(v.unitId))) &&
   Number.isFinite(v.harga) &&
   v.harga > 0 &&
-  Number.isFinite(v.tenorBulan) &&
+  TENOR_OPTIONS.some((option) => option.value === v.tenorBulan) &&
   Number.isFinite(v.ratePercent)
 
 // Hanya parameter simulasi (bukan data pribadi) yang disimpan, dan hanya selama tab terbuka.
@@ -20,18 +21,6 @@ export function loadSimulation() {
     return isValid(parsed) ? parsed : null
   } catch {
     return null
-  }
-}
-
-// Simulasi untuk unit tertentu: tipe & harga dari unit itu, tenor/bunga memakai pilihan terakhir
-// pengguna (atau 10 tahun, 8% bila belum pernah mengatur).
-export function simulationForUnit(unit) {
-  const stored = loadSimulation()
-  return {
-    unitId: unit.id,
-    harga: unit.hargaMulai,
-    tenorBulan: stored ? stored.tenorBulan : 120,
-    ratePercent: stored ? stored.ratePercent : 8,
   }
 }
 

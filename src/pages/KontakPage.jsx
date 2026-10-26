@@ -8,8 +8,8 @@ export default function KontakPage() {
       <SectionHeading
         level={1}
         eyebrow="Kontak"
-        title="Hubungi Tim Pemasaran Kami"
-        description="Datang langsung ke kantor pemasaran atau hubungi kami melalui WhatsApp dan email."
+        title="Lokasi dan Kontak Solaville"
+        description="Datang ke lokasi, atau minta petunjuk arah dari posisi Anda. Tim pemasaran juga bisa dihubungi lewat WhatsApp dan email."
       />
 
       <div className="mt-10 grid md:grid-cols-2 gap-8">

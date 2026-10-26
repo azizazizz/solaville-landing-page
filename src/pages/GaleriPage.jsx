@@ -30,7 +30,7 @@ export default function GaleriPage() {
         <SectionHeading
           level={1}
           eyebrow="Galeri"
-          title="Dokumentasi Kawasan Solaville"
+          title="Galeri Visualisasi Solaville"
           description="Gambar berikut adalah visualisasi ilustratif dan akan diganti dengan dokumentasi asli dari lokasi. Kondisi sebenarnya dapat berbeda."
         />
 

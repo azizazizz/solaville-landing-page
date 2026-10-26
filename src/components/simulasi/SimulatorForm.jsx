@@ -1,13 +1,7 @@
 import { useState } from "react"
 import { units } from "../../data/units"
 import { formatThousands, parseRupiahInput } from "../../utils/currency"
-
-const TENOR_OPTIONS = [
-  { value: 60, label: "5 tahun (60 bulan)" },
-  { value: 120, label: "10 tahun (120 bulan)" },
-  { value: 180, label: "15 tahun (180 bulan)" },
-  { value: 240, label: "20 tahun (240 bulan)" },
-]
+import { TENOR_OPTIONS } from "../../utils/loan"
 
 const MAX_RATE = 30
 
@@ -38,22 +32,13 @@ export default function SimulatorForm({ values, onChange }) {
   // Teks bunga disimpan terpisah dari angkanya supaya "8," atau kolom kosong bisa diketik
   const [rateText, setRateText] = useState(() => rateToText(values.ratePercent))
 
+  // Harga tidak ditentukan oleh tipe unit: pengunjung mengisi sendiri sesuai harga dari tim pemasaran
   function handleUnitChange(event) {
-    const unitId = event.target.value
-    const unit = units.find((item) => item.id === unitId)
-    onChange({
-      ...values,
-      unitId,
-      harga: unit ? unit.hargaMulai : values.harga,
-    })
+    onChange({ ...values, unitId: event.target.value })
   }
 
   function handleHargaChange(event) {
-    onChange({
-      ...values,
-      unitId: "",
-      harga: parseRupiahInput(event.target.value),
-    })
+    onChange({ ...values, harga: parseRupiahInput(event.target.value) })
   }
 
   function handleRateChange(event) {
@@ -67,7 +52,7 @@ export default function SimulatorForm({ values, onChange }) {
       <label className="flex flex-col gap-1">
         <span className="text-sm text-fg-soft">Pilih Tipe Unit</span>
         <select value={values.unitId} onChange={handleUnitChange} className={fieldClass}>
-          <option value="">Isi harga secara manual</option>
+          <option value="">Belum memilih tipe</option>
           {units.map((unit) => (
             <option key={unit.id} value={unit.id}>
               {unit.nama}
@@ -85,10 +70,11 @@ export default function SimulatorForm({ values, onChange }) {
             inputMode="numeric"
             value={values.harga ? formatThousands(values.harga) : ""}
             onChange={handleHargaChange}
-            placeholder="0"
+            placeholder="Isi harga unit"
             className="min-w-0 flex-1 bg-transparent px-2 py-3 text-fg outline-none"
           />
         </div>
+        <span className="text-xs text-fg-soft">Harga unit disampaikan oleh tim pemasaran.</span>
       </label>
 
       <label className="flex flex-col gap-1">

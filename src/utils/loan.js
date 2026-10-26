@@ -1,3 +1,11 @@
+// Pilihan tenor di simulasi (bulan). Satu daftar dipakai form dan validasi simulasi tersimpan.
+export const TENOR_OPTIONS = [
+  { value: 180, label: "15 tahun (180 bulan)" },
+  { value: 240, label: "20 tahun (240 bulan)" },
+  { value: 300, label: "25 tahun (300 bulan)" },
+]
+export const DEFAULT_TENOR_BULAN = TENOR_OPTIONS[0].value
+
 /**
  * Simulasi cicilan KPR sederhana menggunakan metode anuitas (bunga efektif),
  * tanpa memperhitungkan uang muka/DP. Seluruh harga unit dianggap sebagai pokok pinjaman.

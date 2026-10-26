@@ -1,8 +1,7 @@
 export const units = [
   {
     id: "tipe-36",
-    nama: "Tipe 36",
-    hargaMulai: 400000000,
+    nama: "Tipe 36/72",
     luasTanah: 72,
     luasBangunan: 36,
     kamarTidur: 2,
@@ -11,7 +10,7 @@ export const units = [
     lantai: "Rumah mezzanine",
     featured: true,
     deskripsi:
-      "Rumah Mezzanine Premium tipe 36/72 yang eksklusif, modern, dan terjangkau. Dua kamar tidur dan satu kamar mandi, dengan mezanin yang terhubung tangga, serta carport di halaman depan.",
+      "Rumah Mezzanine Premium tipe 36/72 yang eksklusif, modern, dan terjangkau. Dua kamar tidur dan satu kamar mandi, dengan mezzanine yang terhubung tangga, serta carport di halaman depan.",
     // Sesuai brosur pemasaran; luas bangunan sudah tampil terpisah
     spesifikasi: [
       "Struktur dan pondasi: batu kali dan beton bertulang",
@@ -25,14 +24,14 @@ export const units = [
     ],
     // id = nama berkas di src/assets/images/unit (tanpa ekstensi)
     gambar: [
-      { id: "tipe-36-eksterior", alt: "Tampak depan rumah Tipe 36 dengan balkon dan carport" },
-      { id: "tipe-36-ruang-tamu", alt: "Ruang tamu Tipe 36 dengan sofa dan tangga" },
-      { id: "tipe-36-kamar", alt: "Kamar tidur utama Tipe 36 dengan jendela dan lemari" },
+      { id: "tipe-36-eksterior", alt: "Tampak depan rumah Tipe 36/72 dengan balkon dan carport" },
+      { id: "tipe-36-ruang-tamu", alt: "Ruang tamu Tipe 36/72 dengan sofa dan tangga" },
+      { id: "tipe-36-kamar", alt: "Kamar tidur utama Tipe 36/72 dengan jendela dan lemari" },
     ],
     // Denah dari brosur pemasaran; rasio = lebar / tinggi gambar, untuk menahan ruangnya sebelum gambar termuat
     denah: {
       id: "tipe-36-denah",
-      alt: "Denah Tipe 36/72: ruang keluarga dengan tangga ke mezanin, dua kamar tidur, satu kamar mandi, taman, dan carport",
+      alt: "Denah Tipe 36/72: ruang keluarga dengan tangga ke mezzanine, dua kamar tidur, satu kamar mandi, taman, dan carport",
       rasio: "1821 / 2799",
     },
   },

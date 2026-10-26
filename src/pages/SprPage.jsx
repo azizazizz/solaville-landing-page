@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { getUnitById, units } from "../data/units"
 import { formatRupiah } from "../utils/currency"
 import { calculateInstallment } from "../utils/loan"
-import { loadSimulation, saveSimulation, simulationForUnit } from "../utils/simulationStore"
+import { loadSimulation, saveSimulation } from "../utils/simulationStore"
 import { getSprDraft, saveCompletedSpr, saveSprDraft } from "../utils/sprDraft"
 import SectionHeading from "../components/common/SectionHeading"
 import SprForm from "../components/simulasi/SprForm"
@@ -18,38 +18,20 @@ function SummaryItem({ label, value, highlight = false }) {
   )
 }
 
-function UnitPicker({ onPick }) {
+// SPR butuh harga unit, yang diisi di langkah Simulasi. Tanpa itu pengunjung diarahkan kembali ke sana.
+function PerluSimulasi() {
   return (
     <div className="mt-8 rounded-3xl bg-base-alt p-6 md:p-8">
-      <h2 className="text-xl text-fg">Pilih Tipe Unit</h2>
+      <h2 className="text-xl text-fg">Isi harga unit di simulasi dulu</h2>
       <p className="mt-1 max-w-xl text-sm text-fg-soft">
-        Pilih tipe unit yang ingin dipesan untuk melanjutkan. Ingin menghitung cicilan dulu?{" "}
-        <Link
-          to="/simulasi"
-          className="underline decoration-fg/30 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
-        >
-          Buka simulasi
-        </Link>
-        .
+        Surat Pesanan Rumah dibuat dari hasil simulasi. Isi harga unit dari tim pemasaran, pilih tenor, lalu lanjutkan ke sini.
       </p>
-
-      <label className="mt-5 flex max-w-md flex-col gap-1">
-        <span className="text-sm text-fg-soft">Tipe Unit</span>
-        <select
-          value=""
-          onChange={(event) => onPick(event.target.value)}
-          className="rounded-xl bg-base px-4 py-3 text-fg outline-none ring-2 ring-transparent transition-shadow focus:ring-primary"
-        >
-          <option value="" disabled>
-            Pilih tipe unit
-          </option>
-          {units.map((unit) => (
-            <option key={unit.id} value={unit.id}>
-              {unit.nama} - mulai {formatRupiah(unit.hargaMulai)}
-            </option>
-          ))}
-        </select>
-      </label>
+      <Link
+        to="/simulasi"
+        className="mt-5 inline-block rounded-xl bg-primary px-6 py-3 text-on-primary transition-colors hover:bg-primary-dark"
+      >
+        Buka Simulasi
+      </Link>
     </div>
   )
 }
@@ -58,15 +40,9 @@ function UnitPicker({ onPick }) {
 const ONLY_UNIT = units.length === 1 ? units[0] : undefined
 
 export default function SprPage() {
-  const location = useLocation()
   const navigate = useNavigate()
-  // Prioritas: unit dari tombol "Pesan Unit Ini", lalu simulasi tersimpan, lalu (jika hanya ada satu
-  // tipe) tipe itu. Selain itu tidak ada nilai bawaan tersembunyi: pengunjung diminta memilih unit.
-  const [simulasi, setSimulasi] = useState(() => {
-    const unitFromState = getUnitById(location.state?.unitId)
-    if (unitFromState) return simulationForUnit(unitFromState)
-    return loadSimulation() ?? (ONLY_UNIT ? simulationForUnit(ONLY_UNIT) : null)
-  })
+  // Simulasi tersimpan (harga sudah diisi di langkah 1). Tanpa itu tidak ada harga untuk dicantumkan di SPR.
+  const [simulasi, setSimulasi] = useState(() => loadSimulation())
   const [buyer, setBuyer] = useState(() => getSprDraft().buyer)
   const [unitIdentity, setUnitIdentity] = useState(() => getSprDraft().unitIdentity)
 
@@ -87,11 +63,6 @@ export default function SprPage() {
         : null,
     [simulasi],
   )
-
-  function handlePickUnit(unitId) {
-    const picked = getUnitById(unitId)
-    if (picked) setSimulasi(simulationForUnit(picked))
-  }
 
   // Dipakai saat harga diisi manual di simulasi (belum ada tipe): harga tetap, tipe ditambahkan
   function handleUnitChange(unitId) {
@@ -125,7 +96,7 @@ export default function SprPage() {
       </div>
 
       {!simulasi ? (
-        <UnitPicker onPick={handlePickUnit} />
+        <PerluSimulasi />
       ) : (
         <>
           <div className="mt-6 rounded-3xl bg-base-alt p-6 md:p-8">

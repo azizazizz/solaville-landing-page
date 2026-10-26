@@ -1,6 +1,6 @@
 import { contact } from "../../data/contact"
 import { buildWaLink } from "../../data/siteConfig"
-import { IconEmail, IconLocation, IconPhone, IconWhatsapp } from "../common/icons"
+import { IconDirections, IconEmail, IconLocation, IconPhone, IconWhatsapp } from "../common/icons"
 
 export default function ContactInfo() {
   return (
@@ -34,6 +34,18 @@ export default function ContactInfo() {
             </li>
           ))}
         </ul>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-3">
+        <a
+          href={contact.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-on-primary transition-colors hover:bg-primary-dark"
+        >
+          <IconDirections className="w-5 h-5" aria-hidden="true" />
+          Petunjuk arah ke lokasi
+        </a>
       </div>
 
       <a

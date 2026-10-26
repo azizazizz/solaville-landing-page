@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 
 function prefersReducedMotion() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  // Di server (prerender) tidak ada window; hasilnya sama dengan pengguna tanpa preferensi gerak minimal
+  return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 }
 
 /**

@@ -1,8 +1,7 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { siteConfig } from "../../data/siteConfig"
 import { units } from "../../data/units"
 import { formatRupiah, formatThousands, parseRupiahInput } from "../../utils/currency"
-import { buildSprNumber, generateSprPdf } from "../../utils/sprDocument"
 import { SPR_FIELD_ORDER, validateSpr } from "../../utils/sprValidation"
 
 const inputClass = (error) =>
@@ -59,6 +58,12 @@ export default function SprForm({
   const [errors, setErrors] = useState({})
   const [submitError, setSubmitError] = useState("")
   const submittingRef = useRef(false)
+  const [membuat, setMembuat] = useState(false)
+
+  // Pembuat PDF (jsPDF, besar) dimuat diam-diam selagi pengguna mengisi form, supaya klik "Buat SPR" tidak menunggu
+  useEffect(() => {
+    import("../../utils/sprDocument").catch(() => {})
+  }, [])
 
   function clearError(field) {
     setErrors((prev) => {
@@ -97,7 +102,7 @@ export default function SprForm({
     clearError("unitId")
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
     if (submittingRef.current) return // abaikan klik ganda: satu SPR, satu unduhan
 
@@ -110,9 +115,12 @@ export default function SprForm({
     setSubmitError("")
 
     submittingRef.current = true
-    const sprNumber = buildSprNumber()
-    const tanggal = new Date().toISOString()
+    setMembuat(true)
+    let selesai
     try {
+      const { buildSprNumber, generateSprPdf } = await import("../../utils/sprDocument")
+      const sprNumber = buildSprNumber()
+      const tanggal = new Date().toISOString()
       generateSprPdf({
         buyer,
         unitIdentity,
@@ -124,13 +132,15 @@ export default function SprForm({
         sprNumber,
         tanggal,
       })
+      selesai = { sprNumber, tanggal }
     } catch {
       // Tidak lanjut ke langkah "Selesai" bila PDF gagal dibuat
       submittingRef.current = false
+      setMembuat(false)
       setSubmitError("SPR gagal dibuat. Periksa isian Anda lalu coba lagi.")
       return
     }
-    onComplete({ sprNumber, tanggal })
+    onComplete(selesai)
   }
 
   const errorCount = Object.keys(errors).length
@@ -332,9 +342,11 @@ export default function SprForm({
       <div className="flex flex-col items-start gap-3">
         <button
           type="submit"
-          className="rounded-xl bg-primary px-6 py-3 text-on-primary transition-colors hover:bg-primary-dark"
+          disabled={membuat}
+          aria-busy={membuat}
+          className="rounded-xl bg-primary px-6 py-3 text-on-primary transition-colors hover:bg-primary-dark disabled:cursor-wait disabled:opacity-60"
         >
-          Buat SPR (PDF)
+          {membuat ? "Membuat PDF..." : "Buat SPR (PDF)"}
         </button>
         {errorCount > 0 ? (
           <p role="alert" className="text-sm text-danger">

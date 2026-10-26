@@ -1,8 +1,12 @@
+const BOOKING_FEE = 3000000
+
 export const siteConfig = {
   brandName: "Solaville",
   tagline: "Harmoni Sempurna untuk Keluarga",
   // Program "cukup booking Rp3 juta": nilai awal kolom booking fee di form SPR (pembeli tetap bisa mengubahnya)
-  bookingFee: 3000000,
+  bookingFee: BOOKING_FEE,
+  // Teks promo diturunkan dari angka yang sama agar tidak bisa berbeda dengan form
+  bookingLabel: `Rp${BOOKING_FEE / 1000000} juta`,
   waNumber: "6281234567890",
   waMessageTemplate:
     "Halo Solaville, saya tertarik dengan informasi perumahan dan ingin bertanya lebih lanjut.",

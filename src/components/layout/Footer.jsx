@@ -47,7 +47,10 @@ export default function Footer() {
 
       {/* Dipisahkan dengan jalur yang lebih gelap, bukan garis */}
       <div className="bg-black/20">
-        <p className="max-w-6xl mx-auto px-5 py-4 text-xs text-center text-on-night/60">
+        <p
+          suppressHydrationWarning
+          className="max-w-6xl mx-auto px-5 py-4 text-xs text-center text-on-night/60"
+        >
           {YEAR} {siteConfig.brandName}. All rights reserved.
         </p>
       </div>

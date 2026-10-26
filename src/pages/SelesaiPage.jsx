@@ -6,7 +6,6 @@ import { formatRupiah } from "../utils/currency"
 import { calculateInstallment } from "../utils/loan"
 import { clearSprData, getCompletedSpr } from "../utils/sprDraft"
 import { IconCheck, IconWhatsapp } from "../components/common/icons"
-import { generateSprPdf } from "../utils/sprDocument"
 import StepIndicator from "../components/simulasi/StepIndicator"
 
 function SummaryItem({ label, value }) {
@@ -22,11 +21,14 @@ export default function SelesaiPage() {
   const navigate = useNavigate()
   const headingRef = useRef(null)
   const [downloadError, setDownloadError] = useState("")
+  const [mengunduh, setMengunduh] = useState(false)
   const completed = getCompletedSpr()
 
   // Memindahkan fokus ke judul agar pembaca layar langsung mendengar bahwa SPR sudah dibuat
   useEffect(() => {
     headingRef.current?.focus()
+    // Pembuat PDF (jsPDF) dimuat diam-diam supaya "Unduh Ulang" langsung berjalan
+    import("../utils/sprDocument").catch(() => {})
   }, [])
 
   // Tanpa SPR yang baru dibuat (mis. halaman dimuat ulang), tidak ada yang bisa ditampilkan
@@ -51,9 +53,11 @@ export default function SelesaiPage() {
   // NIK dan data sensitif lain sengaja tidak dimasukkan ke pesan WhatsApp
   const waMessage = `Halo Solaville, saya ${buyer.namaLengkap}. Saya sudah membuat SPR nomor ${sprNumber} untuk ${unitLabel}. Mohon info proses selanjutnya.`
 
-  function handleDownloadAgain() {
+  async function handleDownloadAgain() {
     setDownloadError("")
+    setMengunduh(true)
     try {
+      const { generateSprPdf } = await import("../utils/sprDocument")
       generateSprPdf({
         buyer,
         unitIdentity,
@@ -67,6 +71,8 @@ export default function SelesaiPage() {
       })
     } catch {
       setDownloadError("SPR gagal diunduh. Coba lagi.")
+    } finally {
+      setMengunduh(false)
     }
   }
 
@@ -112,9 +118,11 @@ export default function SelesaiPage() {
           <button
             type="button"
             onClick={handleDownloadAgain}
-            className="rounded-xl bg-on-night/10 px-6 py-3 text-on-night transition-colors hover:bg-on-night/20"
+            disabled={mengunduh}
+            aria-busy={mengunduh}
+            className="rounded-xl bg-on-night/10 px-6 py-3 text-on-night transition-colors hover:bg-on-night/20 disabled:cursor-wait disabled:opacity-60"
           >
-            Unduh Ulang SPR (PDF)
+            {mengunduh ? "Menyiapkan PDF..." : "Unduh Ulang SPR (PDF)"}
           </button>
         </div>
         {downloadError ? (

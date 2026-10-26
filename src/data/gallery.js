@@ -12,7 +12,7 @@ export const gallery = [
     id: "gal-01",
     kategori: "eksterior",
     alt: "Tampak depan dua rumah kembar dengan balkon, carport, dan taman depan",
-    label: "Fasad Tipe 36",
+    label: "Fasad Tipe 36/72",
   },
   {
     id: "gal-02",

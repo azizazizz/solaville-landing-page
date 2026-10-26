@@ -125,14 +125,21 @@ h4 {
   font-family: var(--font-display);
 }
 
-/* Efek muncul saat konten masuk layar (dikendalikan komponen Reveal, hanya sekali per elemen) */
+/*
+ * Efek muncul saat konten masuk layar (dikendalikan komponen Reveal, hanya sekali per elemen).
+ * Konten terlihat secara default, sehingga HTML hasil prerender terbaca tanpa JavaScript dan tidak
+ * menunda LCP. Elemen baru disembunyikan setelah JavaScript siap (kelas reveal-ready, dipasang MainLayout).
+ */
 .reveal {
-  opacity: 0;
-  transform: translateY(16px);
   transition:
     opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
+}
+
+html.reveal-ready .reveal:not([data-visible]) {
+  opacity: 0;
+  transform: translateY(16px);
 }
 
 .reveal[data-visible="true"] {
@@ -158,14 +165,14 @@ h4 {
     transition-delay: 0ms !important;
   }
 
-  .reveal {
+  html.reveal-ready .reveal:not([data-visible]) {
     opacity: 1;
     transform: none;
   }
 }
 
 @media print {
-  .reveal {
+  html.reveal-ready .reveal:not([data-visible]) {
     opacity: 1;
     transform: none;
   }

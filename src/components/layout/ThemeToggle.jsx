@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react"
 import { IconMoon, IconSun } from "../common/icons"
-import { applyTheme, getPreferredTheme, storeTheme } from "../../utils/theme"
+import useTheme from "../../hooks/useTheme"
+import { applyTheme, storeTheme } from "../../utils/theme"
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState(getPreferredTheme)
+  const theme = useTheme()
 
-  useEffect(() => {
-    applyTheme(theme)
-    storeTheme(theme)
-  }, [theme])
-
+  // Preferensi baru disimpan saat pengguna memilih, bukan saat halaman dibuka
   function toggleTheme() {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"))
+    const next = theme === "dark" ? "light" : "dark"
+    applyTheme(next)
+    storeTheme(next)
   }
 
   return (

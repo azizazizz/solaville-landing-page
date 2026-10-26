@@ -8,10 +8,9 @@ export default function HomeCTA() {
     <section className="max-w-6xl mx-auto px-5 py-12">
       <Reveal className="rounded-3xl bg-night px-6 py-10 text-on-night md:px-12 md:py-14 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         <div>
-          <h2 className="text-3xl font-display">Masih ragu memilih unit yang pas?</h2>
+          <h2 className="text-3xl font-display">Unit terbatas. Siap booking?</h2>
           <p className="mt-2 text-on-night/70 max-w-md">
-            Coba hitung simulasi cicilan terlebih dahulu, atau bicara langsung dengan tim
-            pemasaran kami melalui WhatsApp.
+            Hitung dulu cicilannya, atau tanya langsung tim pemasaran lewat WhatsApp.
           </p>
         </div>
         <div className="flex flex-wrap gap-3">

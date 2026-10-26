@@ -1,4 +1,4 @@
-import { formatRupiah } from "../../utils/currency"
+import { siteConfig } from "../../data/siteConfig"
 import Photo from "../common/Photo"
 import { IconArea, IconBath, IconBed } from "../common/icons"
 
@@ -24,7 +24,7 @@ export default function UnitCard({ unit, onPilih, horizontal = false }) {
         <div>
           <h3 className={`text-fg ${horizontal ? "text-2xl md:text-3xl" : "text-xl"}`}>{unit.nama}</h3>
           <p className="text-primary font-medium mt-1">
-            Mulai {formatRupiah(unit.hargaMulai)}
+            DP 0%, cukup booking {siteConfig.bookingLabel}
           </p>
         </div>
 

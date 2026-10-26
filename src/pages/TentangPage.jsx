@@ -2,6 +2,7 @@ import { company } from "../data/company"
 import SectionHeading from "../components/common/SectionHeading"
 import logoFull from "../assets/logo/logo-full.png?format=webp&quality=85"
 import Reveal from "../components/common/Reveal"
+import FaktaSingkat from "../components/home/FaktaSingkat"
 import HomeCTA from "../components/home/HomeCTA"
 
 export default function TentangPage() {
@@ -11,8 +12,8 @@ export default function TentangPage() {
         <SectionHeading
           level={1}
           eyebrow="Tentang Kami"
-          title={`Mengenal ${company.namaPerumahan}`}
-          description={`Dibangun pada tahun ${company.tahunPembangunan} oleh ${company.namaDeveloper}.`}
+          title={`Tentang Perumahan ${company.namaPerumahan} di Serang Baru`}
+          description={`Dibangun pada tahun ${company.tahunPembangunan}.`}
         />
 
         <div className="mt-10 grid md:grid-cols-2 gap-10 items-start">
@@ -29,6 +30,10 @@ export default function TentangPage() {
           <p className="text-fg-soft leading-relaxed">{company.tentang}</p>
         </div>
       </section>
+
+      <Reveal as="section" className="max-w-6xl mx-auto px-5 py-8">
+        <FaktaSingkat judul="Solaville dalam satu tampilan" />
+      </Reveal>
 
       <Reveal as="section" className="max-w-6xl mx-auto px-5 py-8">
         <div className="grid gap-10 rounded-3xl bg-base-alt p-8 md:grid-cols-2 md:p-12">

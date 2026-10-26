@@ -1,0 +1,37 @@
+<!doctype html>
+<!--
+  Templat gambar pratinjau sosial (public/og-solaville.jpg, 1200x630).
+  Cara membuat ulang: buka berkas ini di Chrome, atur jendela ke 1200x630 (DevTools, device toolbar),
+  lalu ambil tangkapan layar dan simpan sebagai JPG di bawah 300 KB (WhatsApp mengabaikan gambar yang lebih besar).
+  Ubah teks di bawah bila tagline atau penawaran berubah, lalu ganti nama berkas agar cache media sosial tidak memakai versi lama.
+-->
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Mulish:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * { box-sizing: border-box; margin: 0; }
+      body { width: 1200px; height: 630px; display: flex; font-family: "Mulish", sans-serif; background: #fff; }
+      .kiri { width: 500px; display: flex; align-items: center; justify-content: center; background: #fff; }
+      .kiri img { width: 400px; height: auto; }
+      .kanan { flex: 1; background: #0f2e20; color: #f6f3e8; padding: 64px 64px; display: flex; flex-direction: column; justify-content: center; gap: 24px; }
+      .tagline { font-size: 22px; letter-spacing: 0.14em; text-transform: uppercase; color: #d4a94a; font-weight: 600; }
+      h1 { font-family: "Montserrat", sans-serif; font-weight: 600; font-size: 60px; line-height: 1.12; }
+      .lokasi { font-size: 26px; color: rgba(246, 243, 232, 0.8); }
+      .pil { display: inline-flex; align-items: center; gap: 18px; align-self: flex-start; background: #d4a94a; color: #0f2e20; border-radius: 16px; padding: 16px 26px; font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 30px; }
+      .pil span { font-weight: 500; }
+    </style>
+  </head>
+  <body>
+    <div class="kiri"><img src="../src/assets/logo/logo-full.png" alt="Solaville" /></div>
+    <div class="kanan">
+      <div class="tagline">Harmoni Sempurna untuk Keluarga</div>
+      <h1>Rumah Mezzanine Premium</h1>
+      <div class="lokasi">Serang Baru, Kabupaten Bekasi</div>
+      <div class="pil">DP 0% <span>cukup booking Rp3 juta</span></div>
+    </div>
+  </body>
+</html>

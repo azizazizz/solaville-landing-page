@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Lightbox from "yet-another-react-lightbox"
 import Zoom from "yet-another-react-lightbox/plugins/zoom"
 import "yet-another-react-lightbox/styles.css"
-import { formatRupiah } from "../../utils/currency"
+import { buildWaLink, siteConfig } from "../../data/siteConfig"
 import { getImage } from "../../utils/images"
 import ImageNote from "../common/ImageNote"
 import Photo from "../common/Photo"
@@ -37,7 +37,7 @@ export default function UnitList({ units, initialSelectedId }) {
   }
 
   function handlePesan(unit) {
-    navigate("/spr", { state: { unitId: unit.id } })
+    navigate("/simulasi", { state: { unitId: unit.id } })
   }
 
   return (
@@ -95,9 +95,22 @@ export default function UnitList({ units, initialSelectedId }) {
               </div>
               <ImageNote className="-mt-3" />
 
-              <p className="text-primary font-medium text-lg">
-                Mulai {formatRupiah(selectedUnit.hargaMulai)}
-              </p>
+              <div>
+                <p className="text-primary font-medium text-lg">
+                  DP 0%, cukup booking {siteConfig.bookingLabel}
+                </p>
+                <p className="mt-1 text-sm text-fg-soft">
+                  <a
+                    href={buildWaLink(`Halo Solaville, saya ingin menanyakan harga ${selectedUnit.nama}.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="-my-3 inline-block py-3 text-fg underline decoration-fg/30 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+                  >
+                    Tanya harga lewat WhatsApp
+                  </a>
+                  , atau gunakan simulasi cicilan di bawah.
+                </p>
+              </div>
 
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-xl bg-base-alt px-5 py-4 text-sm text-fg-soft">
                 <span className="flex items-center gap-2">

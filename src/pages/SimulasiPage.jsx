@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { getUnitById, units } from "../data/units"
-import { calculateInstallment } from "../utils/loan"
+import { calculateInstallment, DEFAULT_TENOR_BULAN } from "../utils/loan"
 import { loadSimulation, saveSimulation } from "../utils/simulationStore"
 import SectionHeading from "../components/common/SectionHeading"
 import SimulatorForm from "../components/simulasi/SimulatorForm"
@@ -11,13 +11,13 @@ import StepIndicator from "../components/simulasi/StepIndicator"
 function buildInitialValues(unitIdFromState) {
   const base = loadSimulation() || {
     unitId: units[0].id,
-    harga: units[0].hargaMulai,
-    tenorBulan: 120,
+    harga: 0,
+    tenorBulan: DEFAULT_TENOR_BULAN,
     ratePercent: 8,
   }
   const unit = getUnitById(unitIdFromState)
-  // Datang dari tombol "Simulasikan" di halaman Unit: pakai tipe & harga itu, tenor/bunga tetap
-  return unit ? { ...base, unitId: unit.id, harga: unit.hargaMulai } : base
+  // Datang dari tombol di halaman Unit: pakai tipe itu, harga/tenor/bunga tetap seperti isian terakhir
+  return unit ? { ...base, unitId: unit.id } : base
 }
 
 export default function SimulasiPage() {
