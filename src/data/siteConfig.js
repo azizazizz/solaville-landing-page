@@ -7,7 +7,8 @@ export const siteConfig = {
   bookingFee: BOOKING_FEE,
   // Teks promo diturunkan dari angka yang sama agar tidak bisa berbeda dengan form
   bookingLabel: `Rp${BOOKING_FEE / 1000000} juta`,
-  waNumber: "6281234567890",
+  // Format internasional tanpa tanda + atau spasi (+62 877-8812-0242)
+  waNumber: "6287788120242",
   waMessageTemplate:
     "Halo Solaville, saya tertarik dengan informasi perumahan dan ingin bertanya lebih lanjut.",
 }
