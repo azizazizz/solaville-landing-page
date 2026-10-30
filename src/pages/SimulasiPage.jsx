@@ -40,7 +40,7 @@ export default function SimulasiPage() {
         level={1}
         eyebrow="Simulasi Pembelian"
         title="Hitung Estimasi Cicilan"
-        description="Simulasi cicilan dihitung dari harga penuh unit tanpa uang muka. Setelah sesuai, lanjutkan membuat Surat Pesanan Rumah (SPR)."
+        description="Isi harga unit dan pilih tenor. Setelah sesuai, lanjutkan membuat Surat Pesanan Rumah (SPR)."
       />
 
       <div className="mt-6">

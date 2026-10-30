@@ -48,8 +48,7 @@ export default function SimulatorResult({ result, tenorBulan, canContinue = true
       </div>
 
       <p className="mt-auto text-xs text-on-night/70">
-        Simulasi ini bersifat estimasi, menggunakan metode bunga anuitas tanpa uang muka.
-        Nilai cicilan sebenarnya mengikuti kebijakan bank penyedia KPR.
+        Memakai metode bunga anuitas tanpa uang muka. Cicilan sebenarnya mengikuti kebijakan bank penyedia KPR.
       </p>
     </div>
   )

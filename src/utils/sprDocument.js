@@ -109,12 +109,12 @@ export function generateSprPdf({
 
   doc.setFontSize(9)
   doc.text(
-    "Dokumen ini merupakan surat pesanan awal dan bukan merupakan bukti pelunasan. Data diri, data unit,",
+    "Dokumen ini adalah surat pesanan awal dan bukan bukti pelunasan. Nilai cicilan di atas bersifat",
     14,
     top,
   )
   doc.text(
-    "dan nilai cicilan di atas bersifat estimasi, dapat berubah sesuai hasil verifikasi dan kebijakan bank.",
+    "estimasi dan dapat berubah sesuai hasil verifikasi dan kebijakan bank.",
     14,
     top + 5,
   )

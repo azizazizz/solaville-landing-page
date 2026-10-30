@@ -12,8 +12,7 @@ export default function TentangPage() {
         <SectionHeading
           level={1}
           eyebrow="Tentang Kami"
-          title={`Tentang Perumahan ${company.namaPerumahan} di Serang Baru`}
-          description={`Dibangun pada tahun ${company.tahunPembangunan}.`}
+          title={`Perumahan ${company.namaPerumahan} di Serang Baru`}
         />
 
         <div className="mt-10 grid md:grid-cols-2 gap-10 items-start">

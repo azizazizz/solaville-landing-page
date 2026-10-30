@@ -70,11 +70,11 @@ export default function SimulatorForm({ values, onChange }) {
             inputMode="numeric"
             value={values.harga ? formatThousands(values.harga) : ""}
             onChange={handleHargaChange}
-            placeholder="Isi harga unit"
+            placeholder="0"
             className="min-w-0 flex-1 bg-transparent px-2 py-3 text-fg outline-none"
           />
         </div>
-        <span className="text-xs text-fg-soft">Harga unit disampaikan oleh tim pemasaran.</span>
+        <span className="text-xs text-fg-soft">Isi sesuai harga dari tim pemasaran.</span>
       </label>
 
       <label className="flex flex-col gap-1">

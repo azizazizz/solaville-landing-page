@@ -42,7 +42,6 @@ const CADANGAN = {
   "keunggulan/akses-tol": "galeri/gal-11",
   "keunggulan/sekolah": "galeri/gal-12",
   "keunggulan/rth": "galeri/gal-08",
-  "keunggulan/keamanan": "galeri/gal-07",
 }
 
 // Mengembalikan { src, srcSet, largest } atau undefined bila berkasnya belum ada

@@ -6,7 +6,7 @@ export default function NotFoundPage() {
       <span className="text-sm uppercase tracking-wide text-primary">404</span>
       <h1 className="text-3xl text-fg">Halaman Tidak Ditemukan</h1>
       <p className="text-fg-soft">
-        Halaman yang Anda cari tidak tersedia atau sudah dipindahkan.
+        Alamat yang Anda cari tidak tersedia atau sudah dipindahkan.
       </p>
       <Link
         to="/"

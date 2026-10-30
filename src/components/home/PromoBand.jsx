@@ -52,10 +52,6 @@ export default function PromoBand() {
         </div>
 
         <div className="flex flex-col gap-8 rounded-3xl bg-base-alt p-7 md:p-10">
-          <p className="text-lg text-fg">
-            DP {promo.dp}. Biaya notaris, AJB, BPHTB, balik nama, SHM, dan proses KPR gratis.
-          </p>
-
           <div className="grid gap-8 sm:grid-cols-2">
             <div>
               <h3 className="mb-3 font-medium text-fg">Gratis</h3>
@@ -84,14 +80,8 @@ export default function PromoBand() {
             </div>
           </div>
 
-          <ul className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-fg">
-            {promo.pilar.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-
           <p className="text-xs text-fg-soft">
-            Unit terbatas. Booking sekarang. Syarat dan ketentuan berlaku.
+            Syarat dan ketentuan berlaku.
           </p>
         </div>
       </Reveal>

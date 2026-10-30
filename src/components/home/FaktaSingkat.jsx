@@ -17,7 +17,6 @@ export default function FaktaSingkat({ judul = "Solaville dalam satu tampilan" }
     ["Isi rumah", `${unit.kamarTidur} kamar tidur, ${unit.kamarMandi} kamar mandi, mezzanine, carport`],
     ["Lokasi", contact.alamat],
     ["Dibangun", String(company.tahunPembangunan)],
-    ["Penawaran", `DP ${company.promo.dp}, cukup booking ${siteConfig.bookingLabel}`],
     [
       "Terdekat",
       "Pintu Tol Sukaragam (Japek 2), kawasan industri, pasar tradisional, sekolah, rumah sakit",

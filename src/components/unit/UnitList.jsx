@@ -93,7 +93,9 @@ export default function UnitList({ units, initialSelectedId }) {
                   />
                 ))}
               </div>
-              <ImageNote className="-mt-3" />
+              <ImageNote className="-mt-3">
+                Gambar dan denah hanya ilustrasi. Kondisi sebenarnya dapat berbeda.
+              </ImageNote>
 
               <div>
                 <p className="text-primary font-medium text-lg">
@@ -108,7 +110,7 @@ export default function UnitList({ units, initialSelectedId }) {
                   >
                     Tanya harga lewat WhatsApp
                   </a>
-                  , atau gunakan simulasi cicilan di bawah.
+                  .
                 </p>
               </div>
 
@@ -124,7 +126,6 @@ export default function UnitList({ units, initialSelectedId }) {
                   {selectedUnit.luasBangunan} m²
                 </span>
                 <span>{selectedUnit.carport} Carport</span>
-                <span>{selectedUnit.lantai}</span>
               </div>
 
               <p className="text-fg-soft">{selectedUnit.deskripsi}</p>
@@ -152,10 +153,7 @@ export default function UnitList({ units, initialSelectedId }) {
                         className="h-full w-full object-contain"
                       />
                     </button>
-                    <ImageNote className="mt-2">
-                      Ketuk denah untuk memperbesar. Denah adalah ilustrasi desain, detail aktual dapat
-                      menyesuaikan kondisi bangunan asli.
-                    </ImageNote>
+                    <p className="mt-2 text-xs text-fg-soft">Ketuk denah untuk memperbesar. Denah adalah ilustrasi desain, detail aktual dapat menyesuaikan kondisi bangunan asli.</p>
                   </div>
                 ) : null}
 

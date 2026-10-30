@@ -88,7 +88,7 @@ export default function SprPage() {
         level={1}
         eyebrow="Surat Pesanan Rumah"
         title="Lengkapi Data Pemesanan"
-        description="Isi data diri dan data unit untuk membuat dokumen SPR dalam bentuk PDF. Data diproses di perangkat Anda dan tidak dikirim ke server."
+        description="Isi data diri dan data unit untuk membuat SPR dalam bentuk PDF. Prosesnya berjalan di perangkat Anda, tanpa dikirim ke server."
       />
 
       <div className="mt-6">

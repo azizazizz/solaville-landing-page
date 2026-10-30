@@ -29,9 +29,9 @@ export default function GaleriPage() {
       <section className="max-w-6xl mx-auto px-5 py-16">
         <SectionHeading
           level={1}
-          eyebrow="Galeri"
-          title="Galeri Visualisasi Solaville"
-          description="Gambar berikut adalah visualisasi ilustratif dan akan diganti dengan dokumentasi asli dari lokasi. Kondisi sebenarnya dapat berbeda."
+          eyebrow="Visualisasi"
+          title="Galeri Solaville"
+          description="Gambar berikut berupa ilustrasi dan akan diganti dengan dokumentasi asli dari lokasi. Kondisi sebenarnya dapat berbeda."
         />
 
         <div className="mt-8 flex flex-wrap gap-3">

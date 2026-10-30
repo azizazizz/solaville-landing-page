@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom"
 import { getFeaturedUnits } from "../../data/units"
-import ImageNote from "../common/ImageNote"
 import SectionHeading from "../common/SectionHeading"
 import Reveal from "../common/Reveal"
 import UnitCard from "../unit/UnitCard"
@@ -18,12 +17,8 @@ export default function FeaturedUnits() {
       <Reveal>
         <SectionHeading
           eyebrow="Tipe Unit"
-          title={
-            units.length === 1
-              ? `${units[0].kamarTidur} kamar tidur, mezzanine, di atas tanah ${units[0].luasTanah} m²`
-              : "Pilihan tipe rumah"
-          }
-          description="Rumah Mezzanine Premium dengan carport. Buka detail untuk melihat spesifikasi dan denah."
+          title={units.length === 1 ? "Tipe rumah yang tersedia" : "Pilihan tipe rumah"}
+          description="Buka detail untuk melihat spesifikasi dan denah."
         />
       </Reveal>
 
@@ -34,7 +29,6 @@ export default function FeaturedUnits() {
           </Reveal>
         ))}
       </div>
-      <ImageNote className="mt-3" />
     </section>
   )
 }

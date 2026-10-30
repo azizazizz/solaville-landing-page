@@ -15,10 +15,11 @@ function TextField({ name, label, required, error, className = "", ...inputProps
     <label htmlFor={id} className={`flex flex-col gap-1 ${className}`}>
       <span className="text-sm text-fg-soft">
         {label}
-        {required ? <span className="text-danger"> *</span> : <span> (opsional)</span>}
+        {required ? null : <span> (opsional)</span>}
       </span>
       <input
         id={id}
+        aria-required={required ? "true" : undefined}
         aria-invalid={error ? "true" : undefined}
         aria-describedby={error ? `${id}-error` : undefined}
         {...inputProps}
@@ -151,10 +152,6 @@ export default function SprForm({
       noValidate
       className="rounded-3xl bg-base-alt p-6 md:p-8 flex flex-col gap-8"
     >
-      <p className="text-sm text-fg-soft">
-        Field bertanda <span className="text-danger">*</span> wajib diisi.
-      </p>
-
       <div>
         <h2 className="text-fg font-medium mb-4">Data Diri</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -246,7 +243,7 @@ export default function SprForm({
           {!unit ? (
             <label htmlFor="spr-unitId" className="flex flex-col gap-1 sm:col-span-2">
               <span className="text-sm text-fg-soft">
-                Tipe Unit<span className="text-danger"> *</span>
+                Tipe Unit
               </span>
               <select
                 id="spr-unitId"
@@ -294,7 +291,7 @@ export default function SprForm({
 
           <label htmlFor="spr-bookingFee" className="flex flex-col gap-1 sm:col-span-2">
             <span className="text-sm text-fg-soft">
-              Booking Fee<span className="text-danger"> *</span>
+              Booking Fee
             </span>
             <div
               className={`flex items-center rounded-xl bg-base ring-2 transition-shadow ${
@@ -321,22 +318,17 @@ export default function SprForm({
               </span>
             ) : (
               <span className="text-xs text-fg-soft">
-                Cukup booking {formatRupiah(siteConfig.bookingFee)}. Nilainya bisa Anda ubah.
+                Bawaan {formatRupiah(siteConfig.bookingFee)}, bisa Anda ubah.
               </span>
             )}
           </label>
         </div>
 
-        <dl className="mt-4 grid sm:grid-cols-2 gap-x-4 gap-y-1 rounded-xl bg-base px-5 py-4 text-sm">
-          <dt className="text-fg-soft">Tipe Unit (mengikuti simulasi)</dt>
-          <dd className="text-fg">{unit ? unit.nama : "Belum dipilih"}</dd>
-          <dt className="text-fg-soft">Luas Tanah / Bangunan</dt>
-          <dd className="text-fg">
-            {unit ? `${unit.luasTanah} m² / ${unit.luasBangunan} m²` : "-"}
-          </dd>
-          <dt className="text-fg-soft">Harga Jual</dt>
-          <dd className="text-fg">{formatRupiah(harga)}</dd>
-        </dl>
+        {unit ? (
+          <p className="mt-4 rounded-xl bg-base px-5 py-4 text-sm text-fg-soft">
+            Luas tanah / bangunan: <span className="text-fg">{unit.luasTanah} m² / {unit.luasBangunan} m²</span>
+          </p>
+        ) : null}
       </div>
 
       <div className="flex flex-col items-start gap-3">

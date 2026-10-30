@@ -99,9 +99,7 @@ export default function SelesaiPage() {
             SPR dan simulasi telah dibuat!
           </h1>
           <p className="mt-3 max-w-2xl text-on-night/80">
-            Dokumen SPR dengan nomor <span className="font-medium text-on-night">{sprNumber}</span>{" "}
-            sudah diunduh ke perangkat Anda. Simpan dokumen ini, lalu hubungi tim pemasaran untuk
-            proses berikutnya.
+            Dokumen SPR sudah diunduh ke perangkat Anda. Simpan dokumen ini untuk proses berikutnya.
           </p>
         </div>
 

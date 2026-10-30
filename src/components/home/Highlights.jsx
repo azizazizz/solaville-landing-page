@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import { company } from "../../data/company"
 import SectionHeading from "../common/SectionHeading"
-import ImageNote from "../common/ImageNote"
 import Photo from "../common/Photo"
 import Reveal from "../common/Reveal"
 
@@ -11,8 +10,7 @@ export default function Highlights() {
       <Reveal>
         <SectionHeading
           eyebrow="Mengapa Solaville"
-          title="Lokasi yang dekat ke tol, kerja, dan kebutuhan harian"
-          description="Tol, kawasan industri, pasar, sekolah, dan rumah sakit, semuanya dekat dari rumah."
+          title="Lokasi dan lingkungan yang menunjang keseharian"
         />
       </Reveal>
 
@@ -50,7 +48,6 @@ export default function Highlights() {
           )
         })}
       </div>
-      <ImageNote className="mt-10" />
     </section>
   )
 }

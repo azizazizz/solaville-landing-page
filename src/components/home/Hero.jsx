@@ -22,8 +22,7 @@ export default function Hero() {
           className="animate-rise-in text-fg-soft max-w-md"
           style={{ animationDelay: "160ms" }}
         >
-          Eksklusif, modern, dan terjangkau. Cukup booking {siteConfig.bookingLabel}, langsung pilih
-          unit impian Anda.
+          Eksklusif, modern, dan terjangkau.
         </p>
         <div
           className="animate-rise-in flex flex-wrap gap-3 pt-2"
@@ -46,7 +45,7 @@ export default function Hero() {
           className="animate-rise-in text-sm text-fg-soft"
           style={{ animationDelay: "320ms" }}
         >
-          Dibangun {company.tahunPembangunan}. Unit terbatas, booking sekarang.
+          Dibangun {company.tahunPembangunan}.
         </p>
       </div>
 

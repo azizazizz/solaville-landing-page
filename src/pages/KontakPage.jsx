@@ -7,9 +7,9 @@ export default function KontakPage() {
     <section className="max-w-6xl mx-auto px-5 py-16">
       <SectionHeading
         level={1}
-        eyebrow="Kontak"
+        eyebrow="Hubungi Kami"
         title="Lokasi dan Kontak Solaville"
-        description="Datang ke lokasi, atau minta petunjuk arah dari posisi Anda. Tim pemasaran juga bisa dihubungi lewat WhatsApp dan email."
+        description="Datang ke lokasi, atau hubungi kami lewat WhatsApp dan email."
       />
 
       <div className="mt-10 grid md:grid-cols-2 gap-8">
